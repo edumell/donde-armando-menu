@@ -1,0 +1,2650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Didáctico - Sabor y Saber</title>
+    <style>
+        :root {
+            --primary: #1e3a8a; /* Azul marino */
+            --accent: #f59e0b;  /* Dorado / Ámbar para resaltar */
+            --bg: #0f172a;      /* Azul oscuro profundo para el fondo */
+            --card-bg: #1e293b; /* Azul grisáceo para las tarjetas */
+            --text-main: #f8fafc; /* Texto claro */
+            --text-muted: #cbd5e1; /* Texto secundario */
+            --didactic-bg: #064e3b; /* Fondo verde oscuro didáctico */
+            --didactic-text: #a7f3d0; /* Texto verde claro didáctico */
+            --whatsapp: #25D366;
+			--special-grad: linear-gradient(135deg, #b45309 0%, #78350f 100%); /* Degradado para especiales */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0 0 80px 0; /* Margen inferior para el botón flotante */
+			
+        }
+		
+
+
+        header {
+            text-align: center;
+            padding: 30px 20px 20px 20px;
+            background: linear-gradient(180deg, #1e3a8a 0%, var(--bg) 100%);
+        }
+
+        header h1 {
+            color: var(--text-main);
+            margin: 0 0 5px 0;
+            font-size: 2.2rem;
+        }
+
+        header p {
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Banner de Elección / Navegación Rápida */
+        .navigation-banner {
+            background-color: var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            padding: 12px 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            overflow-x: auto; /* Permite scroll horizontal en celulares */
+            white-space: nowrap;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Ajuste para pantallas pequeñas (scroll horizontal suave) */
+        @media (max-width: 768px) {
+            .navigation-banner {
+                justify-content: flex-start;
+            }
+        }
+
+        .nav-btn {
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--accent);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .menu-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+		
+		   /* BANNER DE ESPECIALES DESTACADO */
+        .specials-banner {
+            background: var(--special-grad);
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .specials-banner::before {
+            content: "🔥 RECOMENDADO";
+            position: absolute;
+            top: 12px;
+            right: -35px;
+            background: #ef4444;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: bold;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .specials-title {
+            color: var(--accent);
+            margin: 0 0 15px 0;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .special-dish {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-left: 4px solid var(--accent);
+        }
+
+        .category {
+            margin-bottom: 50px;
+            scroll-margin-top: 80px; /* Evita que el banner tape el título al hacer clic */
+        }
+
+        .category h2 {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 8px;
+            color: var(--text-main);
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .dish-card {
+            background: var(--card-bg);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border: 1px solid #334155;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .dish-info {
+            flex: 1;
+            padding-right: 15px;
+        }
+
+        .dish-title {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            margin: 0 0 6px 0;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .dish-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+        }
+
+        /* Sección didáctica adaptada al fondo oscuro */
+        .didactic-box {
+            background: var(--didactic-bg);
+            border-left: 4px solid #10b981;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            color: var(--didactic-text);
+            border-radius: 0 8px 8px 0;
+            margin-top: 10px;
+        }
+
+        .dish-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #d97706;
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge.kids { background: #0284c7; }
+        .badge.bio { background: #059669; }
+
+        /* Botón de WhatsApp Flotante */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--whatsapp);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            background-color: #20ba5a;
+        }
+		
+		/* ESTILOS DE LA TABLA (Fondo azul oscuro con bordes y hover) */
+		.menu-table {
+			width: 100%;
+			border-collapse: collapse;
+			background: #1e293b; /* Azul grisáceo (tarjeta) */
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+			border: 1px solid #334155;
+			margin-bottom: 15px;
+		}
+
+		.menu-table th, .menu-table td {
+			padding: 14px 20px;
+			text-align: left;
+			color: #f8fafc; /* Texto claro */
+		}
+
+		.menu-table th {
+			background-color: #2563eb; /* Azul brillante para el encabezado */
+			font-weight: 600;
+			text-transform: uppercase;
+			font-size: 0.9rem;
+			letter-spacing: 0.5px;
+		}
+
+		.menu-table tr {
+			border-bottom: 1px solid #334155;
+			transition: background-color 0.2s;
+		}
+
+		.menu-table tr:last-child {
+			border-bottom: none;
+		}
+
+		.menu-table tr:hover {
+			background-color: #243249; /* Resaltado al pasar el cursor */
+		}
+
+		.table-price {
+			text-align: right;
+			font-weight: bold;
+			color: #f59e0b; /* Dorado / Ámbar para el precio */
+			font-size: 1.1rem;
+		}
+
+		/* Caja didáctica inferior */
+		.didactic-box {
+			background: #064e3b; /* Fondo verde oscuro */
+			border-left: 4px solid #10b981;
+			padding: 10px 14px;
+			font-size: 0.85rem;
+			color: #a7f3d0;
+			border-radius: 0 8px 8px 0;
+			margin-top: 10px;
+		}
+		
+		/* Contenedor adaptado para tablas con contenido largo */
+		.ceviche-table {
+			width: 100%;
+			border-collapse: collapse;
+			background: #1e293b; /* Azul grisáceo de las tarjetas */
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+			border: 1px solid #334155;
+			margin-bottom: 20px;
+		}
+
+		.ceviche-table th {
+			background-color: #2563eb; /* Azul brillante */
+			color: #f8fafc;
+			padding: 14px 20px;
+			font-weight: 600;
+			text-transform: uppercase;
+			font-size: 0.9rem;
+			letter-spacing: 0.5px;
+			text-align: left;
+		}
+
+		.ceviche-table td {
+			padding: 18px 20px;
+			vertical-align: top;
+			border-bottom: 1px solid #334155;
+		}
+
+		.ceviche-table tr:last-child td {
+			border-bottom: none;
+		}
+
+		.ceviche-table tr:hover {
+			background-color: #243249; /* Efecto iluminado al pasar el mouse */
+		}
+
+		/* Estilo del nombre del plato dentro de la tabla */
+		.ceviche-title {
+			font-size: 1.15rem;
+			font-weight: bold;
+			color: #f8fafc;
+			margin: 0 0 6px 0;
+		}
+
+		/* Estilo de los ingredientes */
+		.ceviche-ingredients {
+			font-size: 0.9rem;
+			color: #cbd5e1; /* Texto secundario más suave */
+			line-height: 1.4;
+			margin: 0;
+		}
+
+		/* Estilo del precio */
+		.ceviche-price {
+			text-align: right;
+			font-weight: bold;
+			color: #f59e0b; /* Dorado / Ámbar destacable */
+			font-size: 1.2rem;
+			white-space: nowrap;
+			padding-top: 18px;
+		}
+
+		/* Cuadro didáctico específico para los ceviches */
+		.ceviche-didactic {
+			background: #064e3b; /* Verde oscuro */
+			border-left: 4px solid #10b981;
+			padding: 12px 16px;
+			font-size: 0.85rem;
+			color: #a7f3d0;
+			border-radius: 0 8px 8px 0;
+			margin-top: 10px;
+		}
+		
+		/* Banner de Horario Destacado */
+		.breakfast-schedule-banner {
+			background: linear-gradient(135deg, #b45309 0%, #78350f 100%); /* Tonos cálidos de mañana */
+			border: 2px solid #f59e0b;
+			border-radius: 12px;
+			padding: 15px 20px;
+			margin-bottom: 20px;
+			display: flex;
+			align-items: center;
+			gap: 15px;
+			box-shadow: 0 4px 10px rgba(245, 158, 11, 0.15);
+		}
+
+		.schedule-icon {
+			font-size: 1.8rem;
+			animation: pulse 2s infinite;
+		}
+
+		.schedule-text {
+			font-size: 1rem;
+			font-weight: 500;
+			color: #f8fafc;
+			margin: 0;
+			line-height: 1.4;
+		}
+
+		.schedule-text strong {
+			color: #f59e0b; /* Resalta la hora en dorado */
+			font-size: 1.1rem;
+			text-transform: uppercase;
+		}
+
+		/* Animación sutil para el reloj */
+		@keyframes pulse {
+			0% { transform: scale(1); }
+			50% { transform: scale(1.08); }
+			100% { transform: scale(1); }
+		}
+
+		/* Tabla de Desayunos */
+		.breakfast-table {
+			width: 100%;
+			border-collapse: collapse;
+			background: #1e293b;
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+			border: 1px solid #334155;
+			margin-bottom: 20px;
+		}
+
+		.breakfast-table th {
+			background-color: #2563eb;
+			color: #f8fafc;
+			padding: 14px 20px;
+			font-weight: 600;
+			text-transform: uppercase;
+			font-size: 0.9rem;
+			letter-spacing: 0.5px;
+			text-align: left;
+		}
+
+		.breakfast-table td {
+			padding: 18px 20px;
+			vertical-align: top;
+			border-bottom: 1px solid #334155;
+		}
+
+		.breakfast-table tr:last-child td {
+			border-bottom: none;
+		}
+
+		.breakfast-table tr:hover {
+			background-color: #243249;
+		}
+
+		.breakfast-title {
+			font-size: 1.15rem;
+			font-weight: bold;
+			color: #f8fafc;
+			margin: 0 0 6px 0;
+		}
+
+		.breakfast-desc {
+			font-size: 0.9rem;
+			color: #cbd5e1;
+			line-height: 1.4;
+			margin: 0;
+		}
+
+		.breakfast-price {
+			text-align: right;
+			font-weight: bold;
+			color: #f59e0b;
+			font-size: 1.2rem;
+			white-space: nowrap;
+			padding-top: 18px;
+		}
+
+		/* Nota didáctica al pie */
+		.breakfast-didactic {
+			background: #064e3b;
+			border-left: 4px solid #10b981;
+			padding: 12px 16px;
+			font-size: 0.85rem;
+			color: #a7f3d0;
+			border-radius: 0 8px 8px 0;
+		}
+		
+		/* Tabla optimizada para platos abundantes y descripciones largas */
+		.sharing-table {
+			width: 100%;
+			border-collapse: collapse;
+			background: #1e293b; /* Azul grisáceo */
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+			border: 1px solid #334155;
+			margin-bottom: 20px;
+		}
+
+		.sharing-table th {
+			background-color: #2563eb; /* Azul brillante */
+			color: #f8fafc;
+			padding: 14px 20px;
+			font-weight: 600;
+			text-transform: uppercase;
+			font-size: 0.9rem;
+			letter-spacing: 0.5px;
+			text-align: left;
+		}
+
+		.sharing-table td {
+			padding: 20px;
+			vertical-align: top;
+			border-bottom: 1px solid #334155;
+		}
+
+		.sharing-table tr:last-child td {
+			border-bottom: none;
+		}
+
+		.sharing-table tr:hover {
+			background-color: #243249; /* Efecto iluminado */
+		}
+
+		/* Título del plato */
+		.sharing-title {
+			font-size: 1.2rem;
+			font-weight: bold;
+			color: #f8fafc;
+			margin: 0 0 6px 0;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		/* Etiqueta para destacar el tamaño */
+		.sharing-badge {
+			background-color: #e11d48; /* Rojo coral */
+			color: white;
+			font-size: 0.7rem;
+			padding: 2px 8px;
+			border-radius: 4px;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+
+		/* Listado de ingredientes */
+		.sharing-desc {
+			font-size: 0.9rem;
+			color: #cbd5e1;
+			line-height: 1.5;
+			margin: 0;
+		}
+
+		/* Precio destacado */
+		.sharing-price {
+			text-align: right;
+			font-weight: bold;
+			color: #f59e0b; /* Dorado / Ámbar */
+			font-size: 1.25rem;
+			white-space: nowrap;
+			padding-top: 20px;
+		}
+
+		/* Bloque didáctico marítimo */
+		.sharing-didactic {
+			background: #064e3b; /* Verde oscuro */
+			border-left: 4px solid #10b981;
+			padding: 12px 16px;
+			font-size: 0.85rem;
+			color: #a7f3d0;
+			border-radius: 0 8px 8px 0;
+		}
+		.dish-price-cell {
+			text-align: right;
+			font-weight: bold;
+			color: var(--accent); /* Aquí se le asigna el color naranja */
+			font-size: 1.2rem;
+			white-space: nowrap;
+			padding-top: 16px;
+		}
+		
+
+		
+		/* DISEÑO TOTALMENTE DISTINTO Y EXCLUSIVO EN VERDE */
+		.agregados-table {
+			width: 100%;
+			border-collapse: separate; /* Permite bordes redondeados independientes */
+			border-spacing: 0 8px;     /* Separa las filas creando un efecto de tarjetas flotantes */
+			margin-bottom: 25px;
+			background: transparent;   /* Quita el fondo rectangular tradicional */
+		}
+
+		/* Cabecera de la tabla en Verde Esmeralda */
+		.agregados-table th {
+			background-color: #065f46; /* Verde bosque profundo */
+			color: #a7f3d0;            /* Texto verde menta claro */
+			padding: 14px 20px;
+			font-weight: bold;
+			text-transform: uppercase;
+			font-size: 0.85rem;
+			letter-spacing: 1px;
+			border: 1px solid #047857;
+		}
+
+		/* Redondear las esquinas superiores de la cabecera */
+		.agregados-table th:first-child { border-radius: 12px 0 0 12px; }
+		.agregados-table th:last-child { border-radius: 0 12px 12px 0; }
+
+		/* Filas transformadas en tarjetas independientes */
+		.agregados-row {
+			background: #0f2922;       /* Fondo verde oliva oscuro muy elegante */
+			box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+			transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+		}
+
+		/* Celdas con bordes específicos para simular tarjetas redondeadas */
+		.agregados-row td {
+			padding: 16px 20px;
+			vertical-align: middle;
+			color: #e6f4ea;            /* Texto claro con matiz verdoso */
+			border-top: 1px solid #115e59;
+			border-bottom: 1px solid #115e59;
+		}
+
+		/* Redondear extremos de cada fila individual */
+		.agregados-row td:first-child {
+			border-left: 5px solid #10b981; /* Borde izquierdo verde brillante muy marcado */
+			border-radius: 10px 0 0 10px;
+		}
+		.agregados-row td:last-child {
+			border-right: 1px solid #115e59;
+			border-radius: 0 10px 10px 0;
+		}
+
+		/* Animación interactiva al pasar el mouse por encima */
+		.agregados-row:hover {
+			transform: translateY(-3px) scale(1.01); /* La fila flota hacia arriba sutilmente */
+			background: #13382c;                     /* Se aclara el tono de verde */
+			box-shadow: 0 6px 12px rgba(16, 185, 129, 0.15); /* Añade un brillo verde inferior */
+		}
+
+		/* Texto del acompañamiento con icono */
+		.agregados-name {
+			font-size: 1.05rem;
+			font-weight: 600;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.agregados-name::before {
+			content: "🌱"; /* Icono orgánico integrado */
+			font-size: 1.1rem;
+		}
+
+		/* Precio en naranja/dorado resaltante */
+		.agregados-price {
+			text-align: right;
+			font-weight: 800;
+			color: #f59e0b; /* Mantiene la coherencia cromática de los precios del menú */
+			font-size: 1.25rem;
+			white-space: nowrap;
+		}
+		
+				/* CONTENEDOR EXCLUSIVO PARA LOS BOTONES DESTACADOS */
+		.special-nav-container {
+			display: flex;
+			justify-content: center;
+			gap: 15px;
+			margin: 25px auto;
+			padding: 0 20px;
+			max-width: 900px;
+		}
+
+		/* ESTILO DEL BOTÓN DE AGREGADOS (Verde Esmeralda Brillante) */
+		.btn-agregados {
+			background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+			color: #ffffff;
+			text-decoration: none;
+			padding: 12px 24px;
+			border-radius: 50px; /* Bordes completamente redondeados estilo píldora */
+			font-size: 1rem;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			border: 2px solid #34d399;
+			box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		.btn-agregados:hover {
+			background: linear-gradient(135deg, #059669 0%, #065f46 100%);
+			border-color: #6ee7b7;
+			transform: translateY(-3px) scale(1.03); /* Efecto flotante y de aumento */
+			box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5); /* Resplandor verde más intenso */
+		}
+
+		/* ESTILO DEL BOTÓN DE BOWLS (Verde Menta con Bordes Brillantes) */
+		.btn-bowls {
+			background: #0f172a; /* Fondo oscuro para hacer contraste */
+			color: #34d399;      /* Texto verde menta brillante */
+			text-decoration: none;
+			padding: 12px 24px;
+			border-radius: 50px;
+			font-size: 1rem;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			border: 2px solid #10b981; /* Borde verde neón */
+			box-shadow: inset 0 0 8px rgba(16, 185, 129, 0.2), 0 4px 15px rgba(0, 0, 0, 0.4);
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		.btn-bowls:hover {
+			background: #10b981; /* Se invierten los colores al pasar el cursor */
+			color: #0f172a;
+			transform: translateY(-3px) scale(1.03);
+			box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+		}
+
+		/* Efecto activo al hacer clic */
+		.btn-agregados:active, .btn-bowls:active {
+			transform: translateY(-1px) scale(1);
+			box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+		}
+
+		/* BOTÓN DE INICIO EXTRA DESTACADO */
+		.btn-inicio-destacado {
+			background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important; /* Degradado dorado/ámbar vibrante */
+			color: #0f172a !important; /* Texto oscuro profundo para máximo contraste */
+			text-decoration: none;
+			padding: 8px 18px;
+			border-radius: 20px;
+			font-size: 0.9rem;
+			font-weight: 800; /* Texto bien grueso */
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			border: 2px solid #fbbf24 !important; /* Borde dorado brillante */
+			box-shadow: 0 0 12px rgba(245, 158, 11, 0.4); /* Resplandor dorado continuo */
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			position: relative;
+			overflow: hidden;
+		}
+
+		/* Efecto de destello de luz que pasa rápido por el botón */
+		.btn-inicio-destacado::after {
+			content: '';
+			position: absolute;
+			top: -50%;
+			left: -60%;
+			width: 30%;
+			height: 200%;
+			background: rgba(255, 255, 255, 0.4);
+			transform: rotate(30deg);
+			transition: none;
+			animation: brilloEfecto 4s infinite linear;
+		}
+
+		@keyframes brilloEfecto {
+			0% { left: -60%; }
+			15% { left: 130%; }
+			100% { left: 130%; }
+		}
+
+		/* Comportamiento al pasar el cursor (Mouse Hover) */
+		.btn-inicio-destacado:hover {
+			background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+			transform: translateY(-2px) scale(1.04);
+			box-shadow: 0 0 20px rgba(245, 158, 11, 0.7); /* Aumenta el resplandor */
+		}
+
+		/* Al hacer clic */
+		.btn-inicio-destacado:active {
+			transform: translateY(-1px) scale(1);
+			box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+		}
+
+		/* ESTILOS EXCLUSIVOS PARA EL MENÚ INFANTIL */
+		.kids-table {
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0 10px; /* Crea un efecto de tarjetas separadas y amigables */
+			margin-bottom: 25px;
+			background: transparent;
+		}
+
+		/* Cabecera colorida, juguetona e infantil */
+		.kids-table th {
+			background: linear-gradient(90deg, #38bdf8 0%, #f59e0b 50%, #f43f5e 100%);
+			color: #ffffff;
+			padding: 14px 20px;
+			font-weight: 800;
+			text-transform: uppercase;
+			font-size: 1rem;
+			letter-spacing: 1px;
+			text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Hace resaltar las letras */
+			border: none;
+		}
+
+		.kids-table th:first-child { border-radius: 14px 0 0 14px; }
+		.kids-table th:last-child { border-radius: 0 14px 14px 0; }
+
+		/* Tarjetas redondeadas para cada plato de niños */
+		.kids-row {
+			background: #1e293b; /* Base del restaurante para mantener la coherencia */
+			box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+			border: 2px solid #334155;
+			transition: transform 0.2s, border-color 0.2s;
+		}
+
+		.kids-row td {
+			padding: 16px 20px;
+			vertical-align: middle;
+		}
+
+		/* Bordes curvos y divertidos para cada fila */
+		.kids-row td:first-child {
+			border-left: 6px solid #f43f5e; /* Línea de color rosa/fucsia infantil */
+			border-radius: 12px 0 0 12px;
+		}
+		.kids-row td:last-child {
+			border-radius: 0 12px 12px 0;
+		}
+
+		/* Animación de brinco alegre al pasar el cursor */
+		.kids-row:hover {
+			transform: translateY(-4px) scale(1.01);
+			border-color: #38bdf8; /* Brillo celeste */
+			box-shadow: 0 6px 15px rgba(56, 189, 248, 0.2);
+		}
+
+		/* Títulos de los platos con tipografía gruesa */
+		.kids-title-text {
+			font-size: 1.2rem;
+			font-weight: 800;
+			color: #f8fafc;
+			margin: 0 0 4px 0;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		/* Descripción del combo infantil */
+		.kids-desc-text {
+			font-size: 0.95rem;
+			color: #cbd5e1;
+			margin: 0;
+			font-style: italic; /* Toque diferenciador */
+		}
+
+		/* Caja de datos didácticos infantiles */
+		.kids-didactic {
+			background: #1c1917; /* Fondo oscuro tipo pizarra */
+			border-left: 4px solid #f59e0b;
+			padding: 12px 16px;
+			font-size: 0.85rem;
+			color: #fef3c7;
+			border-radius: 0 8px 8px 0;
+			margin-top: 15px;
+		}
+
+
+		/* ESTILOS EXCLUSIVOS PARA POSTRES ITALIANOS Y BEBIDAS DULCES */
+		.dessert-table {
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0 8px; /* Separa las filas de postres sutilmente */
+			margin-bottom: 25px;
+			background: transparent;
+		}
+
+		/* Cabecera elegante en tonos café espresso, avellana y crema */
+		.dessert-table th {
+			background: linear-gradient(90deg, #4a2c11 0%, #7c4a1e 50%, #b58255 100%);
+			color: #f8fafc;
+			padding: 14px 20px;
+			font-weight: 700;
+			text-transform: uppercase;
+			font-size: 0.95rem;
+			letter-spacing: 1px;
+			border: none;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+		}
+
+		.dessert-table th:first-child { border-radius: 12px 0 0 12px; }
+		.dessert-table th:last-child { border-radius: 0 12px 12px 0; }
+
+		/* Filas individuales estilizadas */
+		.dessert-row {
+			background: #1e293b; /* Mantiene la coherencia con el fondo azul marino del restaurante */
+			box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+			transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+		}
+
+		.dessert-row td {
+			padding: 16px 20px;
+			vertical-align: middle;
+		}
+
+		/* Línea lateral de color caramelo e inicio curvo */
+		.dessert-row td:first-child {
+			border-left: 5px solid #d97706; /* Detalle dorado/caramelo */
+			border-radius: 8px 0 0 8px;
+		}
+		.dessert-row td:last-child {
+			border-radius: 0 8px 8px 0;
+		}
+
+		/* Efecto suave al pasar el cursor */
+		.dessert-row:hover {
+			transform: translateY(-2px);
+			background-color: #243249; /* Iluminación sutil */
+			box-shadow: 0 4px 10px rgba(217, 119, 6, 0.15); /* Resplandor color ámbar */
+		}
+
+		/* Nombre del postre o bebida */
+		.dessert-name-text {
+			font-size: 1.15rem;
+			font-weight: 600;
+			color: #f8fafc;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		/* Caja de datos didácticos del pastelero */
+		.dessert-didactic {
+			background: #1e1b4b; /* Tono azul noche profundo */
+			border-left: 4px solid #b58255;
+			padding: 12px 16px;
+			font-size: 0.85rem;
+			color: #e0e7ff;
+			border-radius: 0 8px 8px 0;
+			margin-top: 15px;
+		}
+		/* ESTILO DEL BOTÓN DE POSTRES (Elegante Color Chocolate y Avellana) */
+		.btn-postres {
+			background: linear-gradient(135deg, #7c4a1e 0%, #4a2c11 100%);
+			color: #ffffff;
+			text-decoration: none;
+			padding: 12px 24px;
+			border-radius: 50px; /* Bordes completamente redondeados estilo píldora */
+			font-size: 1rem;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			border: 2px solid #b58255; /* Borde color crema/dorado */
+			box-shadow: 0 4px 15px rgba(124, 74, 30, 0.4); /* Resplandor cálido continuo */
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		.btn-postres:hover {
+			background: linear-gradient(135deg, #603814 0%, #36200b 100%);
+			border-color: #d97706; /* El borde se ilumina a un tono caramelo */
+			transform: translateY(-3px) scale(1.03); /* Efecto flotante */
+			box-shadow: 0 8px 20px rgba(217, 119, 6, 0.4); /* Brillo más intenso al pasar el mouse */
+		}
+
+		.btn-postres:active {
+			transform: translateY(-1px) scale(1);
+			box-shadow: 0 2px 8px rgba(124, 74, 30, 0.3);
+		}
+
+
+		/* ESTILOS EXCLUSIVOS PARA LA BARRA DE BEBIDAS Y TRAGOS */
+		.drinks-table {
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0 8px; /* Separa las filas simulando posavasos de barra */
+			margin-bottom: 25px;
+			background: transparent;
+		}
+
+		/* Cabecera estilo barra de bar (Azul neón / Cian refrescante) */
+		.drinks-table th {
+			background: linear-gradient(90deg, #0e7490 0%, #06b6d4 50%, #22d3ee 100%);
+			color: #ffffff;
+			padding: 14px 20px;
+			font-weight: 700;
+			text-transform: uppercase;
+			font-size: 0.95rem;
+			letter-spacing: 1px;
+			border: none;
+			box-shadow: 0 4px 10px rgba(6, 182, 212, 0.25);
+			text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+		}
+
+		.drinks-table th:first-child { border-radius: 12px 0 0 12px; }
+		.drinks-table th:last-child { border-radius: 0 12px 12px 0; }
+
+		/* Subtítulo interno de la tabla para separar Tragos de Bebidas */
+		.drinks-divider {
+			background: rgba(6, 182, 212, 0.1) !important;
+			text-align: center;
+			font-weight: 800;
+			color: #22d3ee !important;
+			text-transform: uppercase;
+			font-size: 0.9rem;
+			letter-spacing: 2px;
+			padding: 10px !important;
+			border: 1px dashed #06b6d4 !important;
+		}
+
+		/* Filas individuales con efecto de cristalera nocturna */
+		.drinks-row {
+			background: #1e293b; /* Base del restaurante */
+			box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+			transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+		}
+
+		.drinks-row td {
+			padding: 16px 20px;
+			vertical-align: middle;
+		}
+
+		/* Línea lateral color cian brillante */
+		.drinks-row td:first-child {
+			border-left: 5px solid #06b6d4; 
+			border-radius: 8px 0 0 8px;
+		}
+		.drinks-row td:last-child {
+			border-radius: 0 8px 8px 0;
+		}
+
+		/* Efecto al pasar el cursor (Mouse Hover) */
+		.drinks-row:hover {
+			transform: translateY(-2px);
+			background-color: #1e3a5f; /* Azul bar más intenso */
+			box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2); /* Resplandor neón sutil */
+		}
+
+		/* Nombre de la bebida con icono */
+		.drinks-name-text {
+			font-size: 1.1rem;
+			font-weight: 600;
+			color: #f8fafc;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		/* Caja didáctica líquida */
+		.drinks-didactic {
+			background: #083344; /* Fondo cian ultra oscuro */
+			border-left: 4px solid #22d3ee;
+			padding: 12px 16px;
+			font-size: 0.85rem;
+			color: #cffafe;
+			border-radius: 0 8px 8px 0;
+			margin-top: 15px;
+		}
+		
+		/* CSS Exclusivo para Empanadas */
+		.empanadas-table {
+			width: 100%;
+			border-collapse: collapse;
+			background: #1e293b;
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+			border: 2px solid #b45309; /* Borde color tostado */
+			margin-bottom: 25px;
+		}
+		.empanadas-table th {
+			background-color: #d97706; /* Encabezado dorado */
+			color: #ffffff;
+			padding: 14px 20px;
+			font-weight: 700;
+			text-transform: uppercase;
+			font-size: 0.9rem;
+			text-align: left;
+		}
+		.empanadas-row {
+			border-bottom: 1px solid #451a03;
+			transition: background-color 0.2s;
+		}
+		.empanadas-row:hover { background-color: #292524; }
+		.empanadas-row td { padding: 14px 20px; color: #f8fafc; }
+		.empanada-name { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+		.empanada-name::before { content: "🥟"; }
+
+		/* CSS Exclusivo para Ceviches */
+		.ceviches-table {
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0 6px;
+			margin-bottom: 25px;
+		}
+		.ceviches-table th {
+			background: linear-gradient(90deg, #0284c7 0%, #0369a1 100%);
+			color: white;
+			padding: 14px 20px;
+			font-weight: 600;
+			text-transform: uppercase;
+			font-size: 0.9rem;
+			text-align: left;
+			border-radius: 8px;
+		}
+		.ceviches-row {
+			background: #1e293b;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+		}
+		.ceviches-row td { padding: 16px 20px; vertical-align: top; }
+		.ceviches-row td:first-child { border-left: 4px solid #38bdf8; border-radius: 8px 0 0 8px; }
+		.ceviches-row td:last-child { border-radius: 0 8px 8px 0; }
+		.ceviches-row:hover { background-color: #1e3a5f; }
+		
+		
+				/* BOTÓN DE WHATSAPP FLOTANTE ADAPTADO A TODO DISPOSITIVO */
+		.whatsapp-btn {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			background-color: var(--whatsapp);
+			color: white;
+			padding: 14px 24px;
+			border-radius: 30px;
+			box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+			text-decoration: none;
+			font-weight: bold;
+			font-size: 1rem;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			z-index: 1000;
+			transition: transform 0.2s, background-color 0.2s;
+		}
+
+		.whatsapp-btn:hover {
+			transform: scale(1.05);
+			background-color: #20ba5a;
+		}
+
+		/* 📱 AJUSTE EXCLUSIVO PARA CELULARES */
+		@media (max-width: 480px) {
+			.whatsapp-btn {
+				bottom: 15px;
+				right: 15px;
+				padding: 10px 16px; /* Padding más compacto */
+				font-size: 0.85rem;  /* Letra un poco más pequeña para que quepa bien */
+				gap: 6px;
+			}
+		}
+		
+		/* CONTENEDOR FLEXIBLE ADAPTADO A MÓVILES */
+		.special-nav-container {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap; /* Permite que los botones bajen si no caben */
+			gap: 12px;
+			margin: 25px auto;
+			padding: 0 20px;
+			max-width: 900px;
+		}
+
+		/* BOTÓN DE POSTRES BASE */
+		.btn-postres {
+			background: linear-gradient(135deg, #7c4a1e 0%, #4a2c11 100%);
+			color: #ffffff;
+			text-decoration: none;
+			padding: 12px 24px;
+			border-radius: 50px;
+			font-size: 1rem;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center; /* Centra el texto por si se achica */
+			gap: 8px;
+			border: 2px solid #b58255;
+			box-shadow: 0 4px 15px rgba(124, 74, 30, 0.4);
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		.btn-postres:hover {
+			background: linear-gradient(135deg, #603814 0%, #36200b 100%);
+			border-color: #d97706;
+			transform: translateY(-3px) scale(1.03);
+			box-shadow: 0 8px 20px rgba(217, 119, 6, 0.4);
+		}
+
+		/* 📱 AJUSTE DE BOTONERA EXCLUSIVO PARA PANTALLAS PEQUEÑAS (TABLETS Y CELULARES) */
+		@media (max-width: 768px) {
+			.special-nav-container {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Hace que se acomoden solos en filas y columnas perfectas */
+				gap: 10px;
+				padding: 0 15px;
+			}
+			
+			.btn-agregados, .btn-bowls, .btn-postres {
+				padding: 10px 12px; /* Reducción de relleno interno */
+				font-size: 0.85rem;   /* Letra idónea para lectura en smartphone */
+				text-align: center;
+			}
+		}
+		/* BANNER DE NAVEGACIÓN - FIJO ARRIBA Y ADAPTADO A CELULARES */
+		.navigation-banner {
+			background-color: var(--primary);
+			position: sticky;
+			top: 0;
+			z-index: 900;
+			padding: 12px 10px;
+			box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+			
+			/* Control para móviles: Activa scroll horizontal con el dedo */
+			overflow-x: auto; 
+			white-space: nowrap;
+			display: flex;
+			justify-content: flex-start; /* Alinea al inicio para el arrastre táctil */
+			gap: 10px;
+			
+			/* Oculta la barra de scroll visual para estética premium */
+			-webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+		}
+
+		/* Ocultar barra de scroll en navegadores modernos */
+		.navigation-banner::-webkit-scrollbar {
+			display: none;
+		}
+
+		/* BOTÓN DE INICIO DORADO ADAPTADO */
+		.btn-inicio-destacado {
+			background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+			color: #0f172a !important;
+			text-decoration: none;
+			padding: 8px 16px;
+			border-radius: 20px;
+			font-size: 0.9rem;
+			font-weight: 800;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			border: 2px solid #fbbf24 !important;
+			box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			position: relative;
+			overflow: hidden;
+			flex-shrink: 0; /* IMPEDIR QUE EL CELULAR LO ACHIQUE O DEFORME */
+		}
+
+		/* BOTONES REGULARES DEL MENÚ (AZULES) ADAPTADOS */
+		.nav-btn {
+			background-color: #2563eb;
+			color: white;
+			text-decoration: none;
+			padding: 8px 16px;
+			border-radius: 20px;
+			font-size: 0.9rem;
+			font-weight: 600;
+			transition: background-color 0.2s, transform 0.1s;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			flex-shrink: 0; /* IMPEDIR QUE EL CELULAR LOS ACHIQUE O DEFORME */
+		}
+
+		.nav-btn:hover {
+			background-color: var(--accent);
+			color: #000;
+			transform: translateY(-2px);
+		}
+
+		/* 📱 AJUSTES EN CELULARES ULTRA PEQUEÑOS (Menos de 480px) */
+		@media (max-width: 480px) {
+			.navigation-banner {
+				padding: 10px 8px; /* Espaciado más ajustado en los bordes */
+				gap: 8px;
+			}
+			
+			.nav-btn, .btn-inicio-destacado {
+				padding: 7px 12px; /* Relleno compacto para dar más espacio de lectura */
+				font-size: 0.82rem;  /* Letra idónea para pantallas pequeñas */
+			}
+		}
+		/* BANNER DE NAVEGACIÓN - REPARADO PARA ARRRASTRE MOUSE Y TÁCTIL */
+		.navigation-banner {
+			background-color: var(--primary);
+			position: sticky;
+			top: 0;
+			z-index: 900;
+			padding: 12px 10px;
+			box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+			
+			/* Configuración de desplazamiento */
+			overflow-x: auto; 
+			white-space: nowrap;
+			display: flex;
+			justify-content: flex-start;
+			gap: 10px;
+			
+			/* Efecto visual de agarre */
+			cursor: grab; 
+			user-select: none; /* Evita que se marque el texto al arrastrar con el mouse */
+			
+			/* Desplazamiento nativo táctil fluido */
+			-webkit-overflow-scrolling: touch; 
+			scroll-behavior: smooth;
+		}
+
+		/* Cambia el cursor cuando el usuario hace clic para arrastrar */
+		.navigation-banner:active {
+			cursor: grabbing;
+		}
+
+		/* Ocultar la barra de scroll visual para estética premium */
+		.navigation-banner::-webkit-scrollbar {
+			display: none;
+		}
+
+		/* Evita que los botones se deformen al arrastrar */
+		.nav-btn, .btn-inicio-destacado {
+			flex-shrink: 0;
+			user-select: none;
+			-webkit-user-drag: none; /* Evita que el navegador intente arrastrar el botón como enlace */
+		}
+
+		/* Ajustes compactos para pantallas de celulares */
+		@media (max-width: 480px) {
+			.navigation-banner {
+				padding: 10px 8px;
+				gap: 8px;
+			}
+			.nav-btn, .btn-inicio-destacado {
+				padding: 7px 12px;
+				font-size: 0.82rem;
+			}
+		}
+		
+				/* BOTÓN DE INICIO FLOTANTE (ESTILO CIRCULAR Y FIJO) */
+		.btn-inicio-flotante {
+			position: fixed;
+			bottom: 20px;
+			left: 20px; /* Ubicado al lado izquierdo opuesto de WhatsApp */
+			background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important; /* Dorado brillante */
+			color: #0f172a !important; /* Texto/icono oscuro para alto contraste */
+			text-decoration: none;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%; /* Hace que sea completamente circular */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.4rem;
+			font-weight: bold;
+			border: 2px solid #fbbf24 !important;
+			box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+			z-index: 1000; /* Asegura que quede por encima de las tablas */
+			transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+			cursor: pointer;
+		}
+
+		/* Efecto al pasar el cursor (Mouse Hover) */
+		.btn-inicio-flotante:hover {
+			transform: scale(1.1);
+			box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+		}
+
+		/* Al hacer clic en pantallas táctiles o mouse */
+		.btn-inicio-flotante:active {
+			transform: scale(0.95);
+		}
+
+		/* 📱 AJUSTE COMPACTO PARA CELULARES (Evita ocupar demasiado espacio visual) */
+		@media (max-width: 480px) {
+			.btn-inicio-flotante {
+				bottom: 15px;
+				left: 15px;
+				width: 44px;
+				height: 44px;
+				font-size: 1.2rem;
+			}
+		}
+
+		/* CORRECCIÓN EXCLUSIVA PARA EL BANNER DE ESPECIALES */
+		.specials-banner {
+			background: linear-gradient(135deg, #b45309 0%, #78350f 100%);
+			border: 2px solid #f59e0b;
+			border-radius: 16px;
+			padding: 25px;
+			margin-bottom: 40px;
+			box-shadow: 0 10px 25px rgba(245, 158, 11, 0.15);
+			position: relative;
+			overflow: hidden;
+		}
+
+		.specials-banner::before {
+			content: "🔥 RECOMENDADO";
+			position: absolute;
+			top: 12px;
+			right: -35px;
+			background: #ef4444;
+			color: white;
+			font-size: 0.65rem;
+			font-weight: bold;
+			padding: 4px 40px;
+			transform: rotate(45deg);
+			box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+		}
+
+		.specials-title {
+			color: #f59e0b;
+			margin: 0 0 15px 0;
+			font-size: 1.6rem;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.special-dish {
+			background: rgba(0, 0, 0, 0.25);
+			border-radius: 12px;
+			padding: 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			gap: 15px;
+		}
+
+		.special-dish .dish-info {
+			flex: 1;
+		}
+
+		/* TÍTULO INTERNO */
+		.special-dish .dish-title {
+			font-size: 1.1rem;
+			font-weight: 800;
+			color: #f8fafc;
+			margin: 0 0 10px 0;
+			letter-spacing: 0.5px;
+		}
+
+		/* DESCRIPCIÓN CORREGIDA (Evita letras juntas) */
+		.special-dish .dish-desc {
+			font-size: 1rem;
+			color: #cbd5e1;
+			line-height: 1.6 !important; /* Separa las líneas de texto */
+			letter-spacing: 0.4px !important; /* Separa las letras entre sí */
+			margin: 0 0 15px 0;
+		}
+
+		/* CAJA ADEMÁS (Colores e interlineado corregidos) */
+		.special-dish .didactic-box {
+			background: #451a03;
+			color: #fef3c7;
+			border-left: 4px solid #f59e0b;
+			padding: 12px 16px;
+			font-size: 0.95rem;
+			line-height: 1.5 !important;
+			border-radius: 0 8px 8px 0;
+			margin-top: 15px;
+		}
+
+		/* CELDA DEL PRECIO NARANJA/DORADO */
+		.special-dish .dish-price-cell {
+			text-align: right;
+			font-weight: 800;
+			color: #f59e0b; /* Color naranja característico */
+			font-size: 1.4rem;
+			white-space: nowrap;
+			background: rgba(0, 0, 0, 0.4);
+			padding: 8px 14px;
+			border-radius: 8px;
+			border: 1px solid rgba(245, 158, 11, 0.3);
+		}
+
+		/* Ajustes adaptables para celulares */
+		@media (max-width: 600px) {
+			.special-dish {
+				flex-direction: column; /* El precio baja ordenadamente si la pantalla es muy chica */
+				align-items: stretch;
+			}
+			.special-dish .dish-price-cell {
+				text-align: center;
+				margin-top: 15px;
+			}
+			.specials-title {
+				font-size: 1.3rem;
+			}
+		}
+
+		/* ESTILOS EXCLUSIVOS PARA LA SECCIÓN DE VINOS */
+		.wines-table {
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0 8px; /* Separa los ítems simulando repisas de una cava */
+			margin-bottom: 35px;
+			background: transparent;
+		}
+
+		/* Cabecera estilo cava elegante (Rojo borgoña / Vino tinto profundo) */
+		.wines-table th {
+			background: linear-gradient(90deg, #4c0519 0%, #881337 50%, #9f1239 100%);
+			color: #ffffff;
+			padding: 16px 20px;
+			font-weight: 700;
+			text-transform: uppercase;
+			font-size: 1rem;
+			letter-spacing: 1.5px;
+			border: none;
+			box-shadow: 0 4px 10px rgba(136, 19, 55, 0.3);
+			text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+		}
+
+		.wines-table th:first-child { border-radius: 12px 0 0 12px; }
+		.wines-table th:last-child { border-radius: 0 12px 12px 0; }
+
+		/* Separador elegante para las subcategorías (Cabernet / Sauvignon) */
+		.wines-sub-header {
+			background: rgba(136, 19, 55, 0.15) !important;
+			text-align: center;
+			font-weight: 800;
+			color: #f43f5e !important; /* Tono rosa/vino brillante */
+			text-transform: uppercase;
+			font-size: 0.95rem;
+			letter-spacing: 3px;
+			padding: 12px !important;
+			border: 1px dashed #881337 !important;
+		}
+
+		/* Filas individuales con efecto de estantería de madera fina */
+		.wines-row {
+			background: #1e293b; /* Fondo base para unificar con el restaurante */
+			box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+			transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+		}
+
+		.wines-row td {
+			padding: 16px 20px;
+			vertical-align: middle;
+		}
+
+		/* Línea lateral color uva madura */
+		.wines-row td:first-child {
+			border-left: 5px solid #9f1239; 
+			border-radius: 8px 0 0 8px;
+		}
+		.wines-row td:last-child {
+			border-radius: 0 8px 8px 0;
+		}
+
+		/* Efecto interactivo al pasar el cursor (Mouse Hover) */
+		.wines-row:hover {
+			transform: translateY(-2px);
+			background-color: #2e1018; /* Matiz vino oscuro al seleccionar */
+			box-shadow: 0 4px 12px rgba(136, 19, 55, 0.25);
+		}
+
+		/* Formato del texto del vino */
+		.wines-name-text {
+			font-size: 1.1rem;
+			font-weight: 600;
+			color: #f8fafc;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		/* Caja de datos didácticos del sommelier */
+		.wines-didactic {
+			background: #4c0519; /* Fondo uva profundo */
+			border-left: 4px solid #f43f5e;
+			padding: 14px 18px;
+			font-size: 0.88rem;
+			color: #ffe4e6;
+			border-radius: 0 8px 8px 0;
+			margin-top: 15px;
+			line-height: 1.5;
+		}
+		
+		/* ESTILO DEL BOTÓN DE VINOS (Elegante Color Borgoña y Uva Profundo) */
+		.btn-vinos-especial {
+			background: linear-gradient(135deg, #881337 0%, #4c0519 100%);
+			color: #ffffff;
+			text-decoration: none;
+			padding: 12px 24px;
+			border-radius: 50px; /* Bordes redondeados estilo píldora */
+			font-size: 1rem;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			border: 2px solid #f43f5e; /* Borde rosa brillante tipo neón/cristal */
+			box-shadow: 0 4px 15px rgba(136, 19, 55, 0.4); /* Resplandor cálido continuo */
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		.btn-vinos-especial:hover {
+			background: linear-gradient(135deg, #9f1239 0%, #5c051c 100%);
+			border-color: #fda4af; /* El borde se ilumina al pasar el cursor */
+			transform: translateY(-3px) scale(1.03); /* Efecto flotante */
+			box-shadow: 0 8px 20px rgba(244, 63, 94, 0.5); /* Brillo más intenso */
+		}
+
+		/* Efecto al hacer clic */
+		.btn-vinos-especial:active {
+			transform: translateY(-1px) scale(1);
+			box-shadow: 0 2px 8px rgba(136, 19, 55, 0.3);
+		}
+
+
+<script>
+    const slider = document.querySelector('.navigation-banner');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    // Cuando el usuario hace clic con el mouse
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        // Guarda la posición inicial del cursor
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    // Cuando el mouse sale de la barra
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+
+    // Cuando el usuario suelta el clic del mouse
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+
+    // Mientras el usuario mueve el mouse con el clic presionado
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return; // Si no hay clic, no hace nada
+        e.preventDefault(); // Evita comportamientos extraños del navegador
+        const x = e.pageX - slider.offsetLeft;
+        // Multiplica * 2 para que el movimiento sea más rápido y natural
+        const walk = (x - startX) * 2; 
+        slider.scrollLeft = scrollLeft - walk;
+    });
+</script>
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>RESTAURANT DONDE ARMANDO</h1>
+        <p>¡El Mejor lugar Familiar!</p>
+    </header>
+
+	    <!-- BANNER DE ELECCIÓN -->
+    <nav class="navigation-banner">
+			<!-- Botón de Inicio Principal -->
+		<a href="#" class="btn-inicio-destacado">
+			<span>🏠</span> Inicio
+		</a>
+        <a href="#especiales" class="nav-btn" style="background-color: var(--accent); color: #000;">⭐ Especiales</a>
+        <a href="#desayunos" class="nav-btn">Desayunos</a>
+        <a href="#compartir" class="nav-btn">Para Compartir</a>
+		<a href="#empanadas" class="nav-btn">Empanadas y Ceviches</a>
+        <a href="#carnes" class="nav-btn">Carnes</a>
+        <a href="#pescados" class="nav-btn">Pescados</a>
+		<a href="#platos-calientes" class="nav-btn">Platos</a>
+        <a href="#ninos" class="nav-btn">Menú de Niños</a>
+        <a href="#bebidas" class="nav-btn">Bebidas</a>
+    </nav>
+	<!-- BOTONES DESTACADOS EXCLUSIVOS -->
+
+<!-- 	<div class="special-nav-container"> -->
+<!-- 		<a href="#agregados" class="btn-agregados"><span>🌱</span> Ver Agregados</a>
+		<a href="#bowls" class="btn-bowls"><span>🥗</span> Explorar Bowls</a> -->
+		<!-- NUEVO BOTÓN DE POSTRES -->
+<!-- 		<a href="#postres-italianos" class="btn-postres">
+			<span>🍰</span> Postres Italianos
+		</a> -->
+<!-- 	</div> -->
+	
+	<div class="special-nav-container">
+		<a href="#agregados" class="btn-agregados"><span>🌱</span> Ver Agregados</a>
+		<a href="#bowls" class="btn-bowls"><span>🥗</span> Explorar Bowls</a>
+		<a href="#postres-italianos" class="btn-postres"><span>🍰</span> Postres</a>
+		<!-- NUEVO BOTÓN EXCLUSIVO DE VINOS -->
+		<a href="#carta-vinos" class="btn-vinos-especial">
+			<span>🍷</span> Carta de Vinos
+		</a>
+	</div>
+
+	
+
+    <div class="menu-container">
+	
+		<!-- BANNER DE ESPECIALES DESTACADO -->
+		<section class="specials-banner" id="especiales">
+			<h2 class="specials-title">⭐ Especial TABLA ARMANDO</h2>
+			<div class="special-dish">
+				<div class="dish-info">
+					<h3 class="dish-title">CONSISTE EN VARIEDAD:</h3>
+					<p class="dish-desc">
+						Mariscos calientes • Pastel de jaiba • Fritos de pescado • Pastel camarón • Fritos de anillos de calamar • Pastel machas • Machitas a la parmesana • Ostiones al pil pil.
+					</p>
+					<div class="didactic-box">
+						<strong>ADEMÁS INCLUYE:</strong><br>
+						2 empanaditas de mariscos • 4 sopaipillas • Porción de papas fritas.
+					</div>
+				</div>
+				<!-- Precio utilizando la clase que deja los números naranjos -->
+				<div class="dish-price-cell">$25.000</div>
+			</div>
+		</section>
+
+        <!-- 1. DESAYUNO -->
+
+		<section class="category" id="desayunos">
+			<h2>Desayunos</h2>
+
+			<!-- Banner de Horario Importante -->
+			<div class="breakfast-schedule-banner">
+				<div class="schedule-icon">⏰</div>
+				<p class="schedule-text">
+					Horario de atención disponible <strong>de 9:00 am hasta las 12:00 pm (Mediodía)</strong>.<br>
+					<small style="color: #cbd5e1; font-size: 0.85rem;">*Pasada esta hora, la cocina cambiará automáticamente al menú de almuerzos.</small>
+				</p>
+			</div>
+
+			<!-- Tabla de Platos -->
+			<table class="breakfast-table">
+				<thead>
+					<tr>
+						<th>Plato e Ingredientes</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Plato 1 -->
+					<tr>
+						<td>
+							<div class="breakfast-title">Paila de huevo</div>
+							<p class="breakfast-desc">3 huevos revueltos con 4 sopaipillas.</p>
+						</td>
+						<td class="breakfast-price" >$3.600</td>
+					</tr>
+					<!-- Plato 2 -->
+					<tr>
+						<td>
+							<div class="breakfast-title">Paila de huevo con queso</div>
+							<p class="breakfast-desc">3 huevos revueltos, queso, 4 sopaipillas.</p>
+						</td>
+						<td class="breakfast-price">$4.000</td>
+					</tr>
+					<!-- Plato 3 -->
+					<tr>
+						<td>
+							<div class="breakfast-title">Sandwich merluza</div>
+							<p class="breakfast-desc">Merluza frita, lechuga, tomate, cebolla, mayonesa a elección de cliente.</p>
+						</td>
+						<td class="breakfast-price">$7.000</td>
+					</tr>
+					<!-- Plato 4 -->
+					<tr>
+						<td>
+							<div class="breakfast-title">Barros Luco</div>
+							<p class="breakfast-desc">Carne a la plancha, queso fundido.</p>
+						</td>
+						<td class="breakfast-price">$7.000</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Bloque Educativo -->
+			<div class="breakfast-didactic">
+				<strong>¿Sabías qué?</strong> Acompañar los huevos con sopaipillas o pan aporta el equilibrio justo de carbohidratos y proteínas de alto valor biológico que tu cuerpo necesita para activar el metabolismo y llenarte de energía durante toda la mañana.
+			</div>
+		</section>
+
+
+        <!-- 2. PARA COMPARTIR -->
+		
+		<section class="category" id="compartir">
+			<h2>Para Compartir</h2>
+			<table class="sharing-table">
+				<thead>
+					<tr>
+						<th>Plato e Ingredientes</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Plato 1 -->
+					<tr>
+						<td>
+							<div class="sharing-title">Plato americano <span class="sharing-badge">Ideal 3-4 pers.</span></div>
+							<p class="sharing-desc">Exquisiteces del mar, machas, carne de jaiba, camarones, picorocos, ulte, chapes, choritos, piures, porción de pastel de jaiba, fritos de pescados, porción de ceviche, todo montado sobre una cama de lechuga.</p>
+						</td>
+						<td class="sharing-price">$25.000</td>
+					</tr>
+					<!-- Plato 2 -->
+					<tr>
+						<td>
+							<div class="sharing-title">Tabla armando <span class="sharing-badge">Para compartir</span></div>
+							<p class="sharing-desc">Ostiones al pil-pil, pastel de machas, pastel de camarones, pastel de jaiba, machas a la parmesana, camarones al pil-pil, 4 sopaipillas, 2 empanadas de marisco, fritos de pescado, anillos de calamar, porción de papas fritas.</p>
+						</td>
+						<td class="sharing-price">$25.000</td>
+					</tr>
+					<!-- Plato 3 -->
+					<tr>
+						<td>
+							<div class="sharing-title">Trilogía marina</div>
+							<p class="sharing-desc">Carapacho, camarones, machas, sobre una cama de lechuga, salsa verde (cebolla picada en cuadritos, cilantro) sazonado con sal, aceite, limón.</p>
+						</td>
+						<td class="sharing-price">$18.000</td>
+					</tr>
+					<!-- Plato 4 -->
+					<tr>
+						<td>
+							<div class="sharing-title">Chorrillana marina</div>
+							<p class="sharing-desc">Base de papas fritas, cebolla caramelizada, machas, camarones, huevos fritos.</p>
+						</td>
+						<td class="sharing-price">$18.000</td>
+					</tr>
+					<!-- Plato 5 -->
+					<tr>
+						<td>
+							<div class="sharing-title">Armando fish</div>
+							<p class="sharing-desc">5 anillos de calamar, 5 brochetas de salmón frito, 5 brochetas de merluza frita, 5 brochetas de reineta frita, salsa armando (machas carapacho en salsa blanca), 4 sopaipillas.</p>
+						</td>
+						<td class="sharing-price">$25.000</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Bloque Educativo -->
+			<div class="sharing-didactic">
+				<strong>¿Sabías qué?</strong> Los mariscos de roca y algas de nuestra costa (como el piure, picoroco y ulte) poseen una altísima concentración de yodo y fierro. Estos minerales esenciales estimulan el correcto funcionamiento de la tiroides y mejoran notablemente los niveles de energía celular.
+			</div>
+		</section>
+
+		
+		<section class="category" id="empanadas">
+			<h2>Empanadas</h2>
+			<table class="empanadas-table">
+				<thead>
+					<tr>
+						<th>Variedad Artesanal</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="empanadas-row"><td><div class="empanada-name">Marisco</div></td><td class="dish-price-cell">$1.800</td></tr>
+					<tr class="empanadas-row"><td><div class="empanada-name">Queso</div></td><td class="dish-price-cell">$1.600</td></tr>
+					<tr class="empanadas-row"><td><div class="empanada-name">Pollo Queso</div></td><td class="dish-price-cell">$2.000</td></tr>
+					<tr class="empanadas-row"><td><div class="empanada-name">Champiñón Queso</div></td><td class="dish-price-cell">$2.000</td></tr>
+					<tr class="empanadas-row"><td><div class="empanada-name">Camaron Queso</div></td><td class="dish-price-cell">$1.800</td></tr>
+					<tr class="empanadas-row"><td><div class="empanada-name">Carapacho Queso</div></td><td class="dish-price-cell">$1.800</td></tr>
+					<tr class="empanadas-row"><td><div class="empanada-name">Macha Queso</div></td><td class="dish-price-cell">$1.800</td></tr>
+				</tbody>
+			</table>
+			<div class="didactic-box" style="border-left-color: #d97706; background: #451a03; color: #fef3c7;">
+				<strong>¿Sabías qué?</strong> El queso derretido de tus empanadas se estira gracias a la **caseína**, una proteína láctca que al calentarse rompe sus enlaces rígidos y se vuelve elástica.
+			</div>
+		</section>
+
+		
+		<section class="category" id="ceviches">
+			<h2>Ceviches</h2>
+			<table class="ceviches-table">
+				<thead>
+					<tr>
+						<th>Especialidades del Mar</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="ceviches-row">
+						<td>
+							<div class="dish-title">🐟 Ceviche de salmón</div>
+							<p class="dish-desc">Salmón en cubitos, cebolla morada, morrón, cilantro, todo sazonado con limón, sal, aceite.</p>
+						</td>
+						<td class="dish-price-cell">$8.000</td>
+					</tr>
+					<tr class="ceviches-row">
+						<td>
+							<div class="dish-title">🍋 Ceviche de machas</div>
+							<p class="dish-desc">Machas en cubitos, cebolla morada, morrón, cilantro, todo sazonado con limón, sal, aceite.</p>
+						</td>
+						<td class="dish-price-cell">$8.000</td>
+					</tr>
+					<tr class="ceviches-row">
+						<td>
+							<div class="dish-title">🌟 Ceviche mixto</div>
+							<p class="dish-desc">Machas en cubitos, salmón en cubitos, cebolla morada, morrón, cilantro, todo sazonado con limón, sal, aceite, más porción de papas fritas.</p>
+						</td>
+						<td class="dish-price-cell">$11.000</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="didactic-box" style="border-left-color: #38bdf8; background: #0c4a6e; color: #e0f2fe;">
+				<strong>Dato Científico:</strong> El jugo de limón altera las proteínas del pescado (desnaturalización). Aunque es un proceso frío sin fuego, el cambio físico y de textura es idéntico al de la cocción tradicional.
+			</div>
+		</section>
+
+
+
+        <!-- 3. CARNES -->
+		
+		<section class="category" id="carnes">
+
+			<h2>Carnes</h2>
+			<table class="menu-table">
+				<thead>
+					<tr>
+						<th>Plato e Ingredientes</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Grupo: Pollo Asado -->
+					<tr>
+						<td>
+							<div class="dish-title">Pollo asado con agregado</div>
+							<p class="dish-desc">Arroz, puré, papas mayo o ensaladas.</p>
+						</td>
+						<td class="dish-price-cell">$6.500</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Pollo asado con papas fritas</div>
+							<p class="dish-desc">Acompañado de papas fritas crujientes.</p>
+						</td>
+						<td class="dish-price-cell">$8.500</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Pollo asado pobre</div>
+							<p class="dish-desc">Cebolla caramelizada, huevos fritos, papas fritas.</p>
+						</td>
+						<td class="dish-price-cell">$11.000</td>
+					</tr>
+
+					<!-- Grupo: Pechuga de Pollo -->
+					<tr>
+						<td>
+							<div class="dish-title">Pechuga de pollo a la plancha con agregado</div>
+							<p class="dish-desc">Arroz, puré, papas mayo o ensaladas.</p>
+						</td>
+						<td class="dish-price-cell">$8.000</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Pechuga de pollo a la plancha con papas fritas</div>
+							<p class="dish-desc">Acompañado de papas fritas crujientes.</p>
+						</td>
+						<td class="dish-price-cell">$10.000</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Pechuga de pollo a la plancha a lo pobre</div>
+							<p class="dish-desc">Cebolla caramelizada, huevos fritos, papas fritas.</p>
+						</td>
+						<td class="dish-price-cell">$13.000</td>
+					</tr>
+
+					<!-- Grupo: Biffe -->
+					<tr>
+						<td>
+							<div class="dish-title">Biffe con agregado</div>
+							<p class="dish-desc">Arroz, puré, papas mayo o ensaladas.</p>
+						</td>
+						<td class="dish-price-cell">$9.000</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Biffe con papas fritas</div>
+							<p class="dish-desc">Acompañado de papas fritas crujientes.</p>
+						</td>
+						<td class="dish-price-cell">$11.000</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Biffe a lo pobre</div>
+							<p class="dish-desc">Cebolla caramelizada, huevos fritos, papas fritas.</p>
+						</td>
+						<td class="dish-price-cell">$13.000</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Cuadro didáctico integrado con los colores verdes anteriores -->
+			<div class="didactic-box">
+				<strong>Secreto Gastronómico:</strong> Cuando pides un plato **"a lo pobre"**, el dulzor característico de la cebolla se logra mediante una cocción muy lenta que libera y concentra sus azúcares naturales, un proceso químico culinario conocido como caramelización natural.
+			</div>
+		</section>
+
+        <!-- 4. PESCADOS -->
+		
+		<section class="category" id="pescados">
+			<h2>Pescados</h2>
+			<table class="menu-table">
+				<thead>
+					<tr>
+						<th>Plato e Ingredientes</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Grupo: Merluza -->
+					<tr>
+						<td>
+							<div class="dish-title">Merluza frita con agregado</div>
+							<p class="dish-desc">Arroz, puré, papas mayo o ensaladas.</p>
+						</td>
+						<td class="dish-price-cell">$6.000</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Merluza frita con papas fritas</div>
+							<p class="dish-desc">Acompañado de papas fritas crujientes.</p>
+						</td>
+						<td class="dish-price-cell">$8.000</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Merluza pobre</div>
+							<p class="dish-desc">Cebolla caramelizada, huevos fritos, papas fritas.</p>
+						</td>
+						<td class="dish-price-cell">$13.500</td>
+					</tr>
+
+					<!-- Grupo: Reineta -->
+					<tr>
+						<td>
+							<div class="dish-title">Reineta frita o plancha con agregado</div>
+							<p class="dish-desc">Arroz, puré, papas mayo o ensaladas.</p>
+						</td>
+						<td class="dish-price-cell">$11.500</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Reineta frita o plancha con papas fritas</div>
+							<p class="dish-desc">Acompañado de papas fritas crujientes.</p>
+						</td>
+						<td class="dish-price-cell">$13.500</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Reineta frita o plancha a lo pobre</div>
+							<p class="dish-desc">Cebolla caramelizada, huevos fritos, papas fritas.</p>
+						</td>
+						<td class="dish-price-cell">$15.000</td>
+					</tr>
+
+					<!-- Grupo: Salmón -->
+					<tr>
+						<td>
+							<div class="dish-title">Salmón frito o plancha con agregado</div>
+							<p class="dish-desc">Arroz, puré, papas mayo o ensaladas.</p>
+						</td>
+						<td class="dish-price-cell">$12.000</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Salmon frito o plancha con papas fritas</div>
+							<p class="dish-desc">Acompañado de papas fritas crujientes.</p>
+						</td>
+						<td class="dish-price-cell">$14.000</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Salmón frito o plancha a lo pobre</div>
+							<p class="dish-desc">Cebolla caramelizada, huevos fritos, papas fritas.</p>
+						</td>
+						<td class="dish-price-cell">$16.500</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Salmón napolitano frito o plancha</div>
+							<p class="dish-desc">Salmón con orégano, queso, rodajas de tomate, más agregado de puré, arroz, papas mayo o ensaladas.</p>
+						</td>
+						<td class="dish-price-cell">$18.000</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Bloque Educativo / Didáctico del Pescado -->
+			<div class="didactic-box">
+				<strong>¿Sabías qué?</strong> El salmón cocinado a la plancha destaca por su alto aporte de **Omega-3**, un tipo de grasa saludable que nuestro cuerpo no puede producir por sí mismo y que ayuda a proteger la salud del corazón y del sistema nervioso.
+			</div>
+		</section>
+		
+		<!-- platos calientes -->
+		
+		<section class="category" id="platos-calientes">
+			<h2>Platos Calientes</h2>
+			<table class="menu-table">
+				<thead>
+					<tr>
+						<th>Plato e Ingredientes</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Machas al pil-pil -->
+					<tr>
+						<td>
+							<div class="dish-title">Machas al pil-pil</div>
+							<p class="dish-desc">Machas salteadas en ajo, mantequilla y anillos de ají rojo seco, pimienta blanca con un toque de vino blanco y cilantro.</p>
+						</td>
+						<td class="dish-price-cell">$9.500</td>
+					</tr>
+					<!-- Camarones al pil-pil -->
+					<tr>
+						<td>
+							<div class="dish-title">Camarones al pil-pil</div>
+							<p class="dish-desc">Camarones salteadas en ajo, mantequilla y anillos de ají rojo seco, pimienta blanca con un toque de vino blanco y cilantro.</p>
+						</td>
+						<td class="dish-price-cell">$11.500</td>
+					</tr>
+					<!-- Machas parmesanas -->
+					<tr>
+						<td>
+							<div class="dish-title">Machas parmesanas</div>
+							<p class="dish-desc">Machas, crema, un toque de ajo, queso fundido, mantequilla, pimienta, presentado en paila de greda.</p>
+						</td>
+						<td class="dish-price-cell">$11.000</td>
+					</tr>
+					<!-- Pastel de jaiba -->
+					<tr>
+						<td>
+							<div class="dish-title">Pastel de jaiba</div>
+							<p class="dish-desc">Carne de jaiba, cebolla en cubitos salteada con mantequilla, crema, un toque de ajo, pan rallado, leche, queso fundido.</p>
+						</td>
+						<td class="dish-price-cell">$11.000</td>
+					</tr>
+					<!-- Pastel de camarones -->
+					<tr>
+						<td>
+							<div class="dish-title">Pastel de camarones</div>
+							<p class="dish-desc">Camarones, cebolla en cubitos salteada con mantequilla, crema, un toque de ajo, pan rallado, leche, queso fundido.</p>
+						</td>
+						<td class="dish-price-cell">$12.500</td>
+					</tr>
+					<!-- Pastel de machas -->
+					<tr>
+						<td>
+							<div class="dish-title">Pastel de machas</div>
+							<p class="dish-desc">Machas, cebolla en cubitos salteada con mantequilla, crema, un toque de ajo, pan rallado, leche, queso fundido.</p>
+						</td>
+						<td class="dish-price-cell">$11.000</td>
+					</tr>
+					<!-- Curanto -->
+					<tr>
+						<td>
+							<div class="dish-title">Curanto</div>
+							<p class="dish-desc">Exquisita mezcla de cholgas, pollo, longaniza, papa cocida, toque de vino blanco, surtido de mariscos (machas, piure, chorito, colitas de camarón) y cilantro.</p>
+						</td>
+						<td class="dish-price-cell">$15.000</td>
+					</tr>
+					<!-- Mariscal caliente -->
+					<tr>
+						<td>
+							<div class="dish-title">Mariscal caliente</div>
+							<p class="dish-desc">Surtido de mariscos (macha, piures, choritos, camarón), huevo a elección del cliente, toque de cilantro y sal.</p>
+						</td>
+						<td class="dish-price-cell">$7.000</td>
+					</tr>
+					<!-- Paila marina -->
+					<tr>
+						<td>
+							<div class="dish-title">Paila marina</div>
+							<p class="dish-desc">Surtido de mariscos (machas, piures, choritos, camarones, picoroco), un trozo de pescado, longaniza, huevo a elección del cliente, toque de cilantro y sal.</p>
+						</td>
+						<td class="dish-price-cell">$10.500</td>
+					</tr>
+					<!-- Caldillo de cholga -->
+					<tr>
+						<td>
+							<div class="dish-title">Caldillo de cholga</div>
+							<p class="dish-desc">Cholgas, cebolla corte pluma, morrón, zanahoria, un toque de vino blanco, papa, pasta de ajo, orégano, cilantro.</p>
+						</td>
+						<td class="dish-price-cell">$6.800</td>
+					</tr>
+					<!-- Caldillo de chorito -->
+					<tr>
+						<td>
+							<div class="dish-title">Caldillo de chorito</div>
+							<p class="dish-desc">Choritos, cebolla corte pluma, morrón, zanahoria, un toque de vino blanco, papa, pasta de ajo, orégano, cilantro.</p>
+						</td>
+						<td class="dish-price-cell">$6.000</td>
+					</tr>
+					<!-- Caldillo de congrio -->
+					<tr>
+						<td>
+							<div class="dish-title">Caldillo de congrio</div>
+							<p class="dish-desc">Congrio, cebolla corte pluma, morrón, zanahoria, un toque de vino blanco, papa, pasta de ajo, orégano, cilantro y arroz.</p>
+						</td>
+						<td class="dish-price-cell">$7.800</td>
+					</tr>
+					<!-- Consomé de mariscos -->
+					<tr>
+						<td>
+							<div class="dish-title">Consomé de mariscos</div>
+							<p class="dish-desc">Concentrado de mariscos, orégano, huevo caído a elección del cliente.</p>
+						</td>
+						<td class="dish-price-cell">$3.800</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Bloque Educativo / Didáctico de Platos Calientes -->
+			<div class="didactic-box">
+				<strong>Dato Culinario:</strong> Muchos de nuestros platos calientes se sirven en **pailas de greda**. La greda artesanal es un excelente aislante térmico natural; tiene la propiedad única de retener el calor acumulado, permitiendo que caldos como la Paila Marina o las Machas Parmesanas sigan burbujeando e intensificando sus sabores directamente en tu mesa.
+			</div>
+		</section>
+
+
+
+ <!-- 5. MENÚ DE NIÑOS -->
+
+		
+		<section class="category" id="ninos">
+			<h2>Menú Niños</h2>
+			
+			<table class="kids-table">
+				<thead>
+					<tr>
+						<th>Plato Infantil</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Salchipapa -->
+					<tr class="kids-row">
+						<td>
+							<div class="kids-title-text">🍟 Salchipapa</div>
+							<p class="kids-desc-text">Porción de papas fritas con vienesa.</p>
+						</td>
+						<td class="dish-price-cell">$6.000</td>
+					</tr>
+					<!-- Hamburguesa -->
+					<tr class="kids-row">
+						<td>
+							<div class="kids-title-text">🍔 Hamburguesa</div>
+							<p class="kids-desc-text">Porción de papas fritas, hamburguesa mamut.</p>
+						</td>
+						<td class="dish-price-cell">$6.000</td>
+					</tr>
+					<!-- Menú niño feliz -->
+					<tr class="kids-row">
+						<td>
+							<div class="kids-title-text">✨ Menú niño feliz</div>
+							<p class="kids-desc-text">Porción de papas fritas, vienesa pulpito, 2 empanadas de queso, 3 nugget.</p>
+						</td>
+						<td class="dish-price-cell">$7.000</td>
+					</tr>
+					<!-- Pollo crispy -->
+					<tr class="kids-row">
+						<td>
+							<div class="kids-title-text">🍗 Pollo crispy</div>
+							<p class="kids-desc-text">Porción de papas fritas con tiritas de pollo crujiente.</p>
+						</td>
+						<td class="dish-price-cell">$7.000</td>
+					</tr>
+					<!-- Nugget -->
+					<tr class="kids-row">
+						<td>
+							<div class="kids-title-text">🍘 Nugget</div>
+							<p class="kids-desc-text">Porción de papas fritas con 5 nugget.</p>
+						</td>
+						<td class="dish-price-cell">$6.000</td>
+					</tr>
+					<!-- Puré con huevo -->
+					<tr class="kids-row">
+						<td>
+							<div class="kids-title-text">🍳 Puré con huevo</div>
+							<p class="kids-desc-text">Porción de puré con 2 huevos fritos.</p>
+						</td>
+						<td class="dish-price-cell">$6.000</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Bloque Educativo Infantil -->
+			<div class="kids-didactic">
+				<strong>🚀 Dato Divertido para Exploradores:</strong> ¿Sabías que las papas fritas crujientes hacen ese ruido tan divertido porque el agua que tienen dentro se evapora súper rápido al cocinarse? ¡Eso crea burbujas de aire diminutas que estallan cuando las muerdes!
+			</div>
+		</section>
+
+		
+        <!-- 6. BEBIDAS -->
+
+		
+		<section class="category" id="bebidas">
+			<h2>Bebidas e Infusiones</h2>
+			
+			<table class="drinks-table">
+				<thead>
+					<tr>
+						<th>Líquidos & Coctelería</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- SECCIÓN BEBIDAS -->
+					<tr class="drinks-row">
+						<td><div class="drinks-name-text">🥤 Bebida 1500cc</div></td>
+						<td class="dish-price-cell">$3.000</td>
+					</tr>
+					<tr class="drinks-row">
+						<td><div class="drinks-name-text">🥤 Bebida 591cc</div></td>
+						<td class="dish-price-cell">$1.600</td>
+					</tr>
+					<tr class="drinks-row">
+						<td><div class="drinks-name-text">🧃 Jugo boca ancha 300cc</div></td>
+						<td class="dish-price-cell">$1.600</td>
+					</tr>
+					<tr class="drinks-row">
+						<td><div class="drinks-name-text">🧃 Jugo botella 1.75L</div></td>
+						<td class="dish-price-cell">$3.000</td>
+					</tr>
+					<tr class="drinks-row">
+						<td><div class="drinks-name-text">🍹 Jugo natural</div></td>
+						<td class="dish-price-cell">$4.000</td>
+					</tr>
+					<tr class="drinks-row">
+						<td><div class="drinks-name-text">🫖 Té o Té infusión</div></td>
+						<td class="dish-price-cell">$1.500</td>
+					</tr>
+					<tr class="drinks-row">
+						<td><div class="drinks-name-text">☕ Café</div></td>
+						<td class="dish-price-cell">$1.500</td>
+					</tr>
+
+					<!-- SEPARADOR DE TRAGOS -->
+					<tr>
+						<td colspan="2" class="drinks-divider">🍸 Barra de Tragos 🍸</td>
+					</tr>
+
+					<!-- SECCIÓN TRAGOS -->
+					<tr class="drinks-row">
+						<td><div class="drinks-name-text">🧪 Ponche picoroco</div></td>
+						<td class="dish-price-cell">$3.000</td>
+					</tr>
+					<tr class="drinks-row">
+						<td><div class="drinks-name-text">🍋 Pisco sour</div></td>
+						<td class="dish-price-cell">$4.000</td>
+					</tr>
+					<tr class="drinks-row">
+						<td><div class="drinks-name-text">🍷 Vaina</div></td>
+						<td class="dish-price-cell">$4.000</td>
+					</tr>
+					<tr class="drinks-row">
+						<td><div class="drinks-name-text">🥃 Piscola</div></td>
+						<td class="dish-price-cell">$4.000</td>
+					</tr>
+					<tr class="drinks-row">
+						<td><div class="drinks-name-text">🟡 Whisky sour</div></td>
+						<td class="dish-price-cell">$4.800</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Bloque Educativo de Coctelería -->
+			<div class="drinks-didactic">
+				<strong>🇨🇱 Tradición Coctelera:</strong> Platos e ingredientes locales dan origen a combinaciones únicas en nuestra barra. Por ejemplo, la **Vaina** es un cóctel clásico chileno que destaca por su textura extremadamente cremosa y espumosa, la cual se logra gracias a la emulsión perfecta generada al batir yemas de huevo frescas con vino añejo, cacao y un toque de canela.
+			</div>
+		</section>
+		
+		<section class="category" id="carta-vinos">
+			<h2>Carta de Vinos</h2>
+			
+			<table class="wines-table">
+				<thead>
+					<tr>
+						<th>Selección de Nuestra Cava</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- SUBCATEGORÍA: VINOS CABERNET -->
+					<tr>
+						<td colspan="2" class="wines-sub-header">🍷 Vinos Cabernet 🍷</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🍾 Casillero del diablo (concha y toro 750cc)</div></td>
+						<td class="dish-price-cell">$12.000</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🍷 Pinot undurraga 750cc</div></td>
+						<td class="dish-price-cell">$9.000</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🍷 Santa emiliana 750cc</div></td>
+						<td class="dish-price-cell">$6.500</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🍷 Gato 750cc</div></td>
+						<td class="dish-price-cell">$6.500</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🍷 Misiones rengo 750cc</div></td>
+						<td class="dish-price-cell">$6.500</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🍷 Misiones rengo 375cc</div></td>
+						<td class="dish-price-cell">$4.200</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🧪 Botellín 187cc</div></td>
+						<td class="dish-price-cell">$2.200</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🍷 Copa de vino casa</div></td>
+						<td class="dish-price-cell">$2.000</td>
+					</tr>
+
+					<!-- SUBCATEGORÍA: VINOS SAUVIGNON -->
+					<tr>
+						<td colspan="2" class="wines-sub-header">🥂 Vinos Sauvignon 🥂</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🍾 Casillero del diablo (concha y toro 750cc)</div></td>
+						<td class="dish-price-cell">$12.000</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🥂 Pinot undurraga 750cc</div></td>
+						<td class="dish-price-cell">$9.000</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🥂 Santa emiliana 750cc</div></td>
+						<td class="dish-price-cell">$6.500</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🥂 Gato 750cc</div></td>
+						<td class="dish-price-cell">$6.500</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🥂 Misiones rengo 750cc</div></td>
+						<td class="dish-price-cell">$6.500</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🥂 Misiones rengo 375cc</div></td>
+						<td class="dish-price-cell">$4.200</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🥂 Santa emiliana 375cc</div></td>
+						<td class="dish-price-cell">$4.200</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🧪 Botellín 187cc</div></td>
+						<td class="dish-price-cell">$2.200</td>
+					</tr>
+					<tr class="wines-row">
+						<td><div class="wines-name-text">🥂 Copa de vino casa</div></td>
+						<td class="dish-price-cell">$2.000</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Bloque Educativo / Didáctico de Vinos -->
+			<div class="wines-didactic">
+				<strong>🍇 El Arte de la Cepa:</strong> ¿Sabías por qué los formatos varían? Las botellas tradicionales de **750cc** permiten una evolución pausada y armónica del vino. Por otro lado, los formatos más compactos como las medias botellas (**375cc**) o botellines (**187cc**) son ideales para asegurar la máxima frescura de una cepa Sauvignon o Cabernet si deseas disfrutar de una copa individual perfectamente equilibrada sin alterar el resto del vino.
+			</div>
+		</section>
+
+
+		
+		<!-- postres -->
+		
+		<section class="category" id="postres-italianos">
+			<h2>Postres Italianos</h2>
+			
+			<table class="dessert-table">
+				<thead>
+					<tr>
+						<th>Especialidad Dolci & Caffè</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Cerezas cherries -->
+					<tr class="dessert-row">
+						<td><div class="dessert-name-text">🍒 Cerezas cherries</div></td>
+						<td class="dish-price-cell">$3.500</td>
+					</tr>
+					<!-- Capuccino -->
+					<tr class="dessert-row">
+						<td><div class="dessert-name-text">☕ Capuccino</div></td>
+						<td class="dish-price-cell">$3.500</td>
+					</tr>
+					<!-- Tiramisú -->
+					<tr class="dessert-row">
+						<td><div class="dessert-name-text">🍰 Tiramisú</div></td>
+						<td class="dish-price-cell">$3.500</td>
+					</tr>
+					<!-- Mousse de frambuesa -->
+					<tr class="dessert-row">
+						<td><div class="dessert-name-text">🍧 Mousse de frambuesa</div></td>
+						<td class="dish-price-cell">$3.500</td>
+					</tr>
+					<!-- Cheesecake de limoncello -->
+					<tr class="dessert-row">
+						<td><div class="dessert-name-text">🍋 Cheesecake de limoncello</div></td>
+						<td class="dish-price-cell">$3.500</td>
+					</tr>
+					<!-- Mousse chocolate blanco y pistacho -->
+					<tr class="dessert-row">
+						<td><div class="dessert-name-text">🟢 Mousse chocolate blanco y pistacho</div></td>
+						<td class="dish-price-cell">$3.500</td>
+					</tr>
+					<!-- Mousse doble de chocolate -->
+					<tr class="dessert-row">
+						<td><div class="dessert-name-text">🍫 Mousse doble de chocolate</div></td>
+						<td class="dish-price-cell">$3.500</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Bloque Educativo Dulce -->
+			<div class="dessert-didactic">
+				<strong>🇮🇹 Historia en tu Mesa:</strong> ¿Sabías que la palabra **Tiramisú** proviene del dialecto veneciano *"tirami sù"*, que significa literalmente *"levántame el ánimo"*? Esto se debe a que combina de forma magistral la energía del café espresso con la cremosidad rica del queso mascarpone y el cacao.
+			</div>
+		</section>
+
+		
+		<!---AGREGADOS -->
+		
+		<section class="category" id="agregados">
+			<h2>Agregados</h2>
+			
+			<!-- Tabla completamente rediseñada -->
+			<table class="agregados-table">
+				<thead>
+					<tr>
+						<th>Complemento</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="agregados-row">
+						<td><div class="agregados-name">Salsa armando</div></td>
+						<td class="agregados-price">$6.800</td>
+					</tr>
+					<tr class="agregados-row">
+						<td><div class="agregados-name">Porción papas mayo</div></td>
+						<td class="agregados-price">$3.500</td>
+					</tr>
+					<tr class="agregados-row">
+						<td><div class="agregados-name">Porción arroz</div></td>
+						<td class="agregados-price">$3.000</td>
+					</tr>
+					<tr class="agregados-row">
+						<td><div class="agregados-name">Porción papas fritas</div></td>
+						<td class="agregados-price">$4.600</td>
+					</tr>
+					<tr class="agregados-row">
+						<td><div class="agregados-name">Porción puré</div></td>
+						<td class="agregados-price">$3.500</td>
+					</tr>
+					<tr class="agregados-row">
+						<td><div class="agregados-name">Porción de limón</div></td>
+						<td class="agregados-price">$500</td>
+					</tr>
+					<tr class="agregados-row">
+						<td><div class="agregados-name">Ensaladas surtida o chilena individual</div></td>
+						<td class="agregados-price">$3.500</td>
+					</tr>
+					<tr class="agregados-row">
+						<td><div class="agregados-name">Ensalada surtida o chilena familiar</div></td>
+						<td class="agregados-price">$7.000</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+
+		<!-- SECCIÓN: BOWLS -->
+		<section class="category" id="bowls">
+			<h2>Bowl</h2>
+			<table class="menu-table">
+				<thead>
+					<tr>
+						<th>Plato e Ingredientes</th>
+						<th style="text-align: right; width: 120px;">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<div class="dish-title">Bowl marino</div>
+							<p class="dish-desc">Base arroz, lechuga, pepino, machas, camarón, todo sazonado con limón, sal, aceite.</p>
+						</td>
+						<td class="dish-price-cell">$9.000</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="dish-title">Bowl chicken</div>
+							<p class="dish-desc">Base arroz, lechuga, pepino, choclo, pollo, todo sazonado con limón, sal, aceite.</p>
+						</td>
+						<td class="dish-price-cell">$9.000</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Bloque Educativo / Didáctico de la sección -->
+			<div class="didactic-box">
+				<strong>Dato Fresco:</strong> Agregar un toque de limón fresco a tus platos y ensaladas no solo realza el sabor del marisco, sino que su alto contenido de **Vitamina C** ayuda a que tu organismo absorba de manera mucho más eficiente el hierro presente en las proteínas.
+			</div>
+		</section>
+
+
+    </div>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <!-- Recuerda cambiar el número 56912345678 por el número real de tu restaurante (incluyendo código de país) -->
+    <a href="https://wa.me/56944915944" class="whatsapp-btn" target="_blank">
+        <span class="wsap-icon">💬</span> Pedir por WhatsApp
+    </a>
+    <!-- BOTÓN DE INICIO FLOTANTE (LADO IZQUIERDO) -->
+    <a href="#" class="btn-inicio-flotante" title="Volver al inicio">
+        🏠
+    </a>
+
+    <!-- BOTÓN DE WHATSAPP FLOTANTE (LADO DERECHO) -->
+<!--     <a href="https://wa.me" class="whatsapp-btn" target="_blank">
+        <span>💬</span> Pedir por WhatsApp
+    </a>
+ -->
+</body>
+</html>
