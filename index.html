@@ -1623,6 +1623,33 @@
 			box-shadow: 0 2px 8px rgba(136, 19, 55, 0.3);
 		}
 
+		:root {
+		    --azul-marino-solido: #0b1f3d; /* Tono de fondo adaptado del logotipo */
+		    --dorado-corporativo: #c5a059; /* Tono dorado para los bordes */
+		}
+		
+		.menu-header {
+		    background-color: var(--azul-marino-solido);
+		    padding: 30px 20px;
+		    text-align: center;
+		}
+		
+		.logo-wrapper {
+		    max-width: 320px;           /* Controla el tamaño máximo en pantallas grandes */
+		    width: 80%;                 /* Se adapta dinámicamente a pantallas móviles */
+		    margin: 0 auto;             /* Centra el contenedor horizontalmente */
+		    background-color: var(--azul-marino-solido);
+		    border-radius: 50%;         /* Hace el borde perfectamente redondo */
+		    border: 4px solid var(--dorado-corporativo);
+		    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25); /* Sombra suave para darle presencia */
+		    padding: 10px;              /* Espaciado interno protector para el logo */
+		}
+		
+		.restaurant-logo {
+		    width: 100%;                /* Hace que la imagen ocupe todo el contenedor */
+		    height: auto;               /* Mantiene la proporción original del logo */
+		    display: block;             /* Elimina espacios vacíos debajo de la imagen */
+		}
 
 <script>
     const slider = document.querySelector('.navigation-banner');
@@ -1664,11 +1691,19 @@
     </style>
 </head>
 <body>
+	<header class="menu-header">
+	    <div class="logo-wrapper">
+	        <!-- Reemplaza con la ruta de tu archivo de imagen procesado -->
+	        <img src="logo.png" alt="Logo Restaurant Donde Armando" class="restaurant-logo">
+	    </div>
+	</header>
 
     <header>
         <h1>RESTAURANT DONDE ARMANDO</h1>
         <p>¡El Mejor lugar Familiar!</p>
     </header>
+
+
 
 	    <!-- BANNER DE ELECCIÓN -->
     <nav class="navigation-banner">
