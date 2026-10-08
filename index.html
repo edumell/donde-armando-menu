@@ -1651,6 +1651,20 @@
 		    display: block;             /* Elimina espacios vacíos debajo de la imagen */
 		}
 
+		.menu-contenedor {
+		  display: flex;            /* Activa el diseño flexible */
+		  justify-content: center;   /* Centra el contenido horizontalmente */
+		  align-items: center;       /* Centra el contenido verticalmente */
+		  width: 100%;               /* Asegura que el menú ocupe todo el ancho */
+		  background-color: #fff;    /* El color de fondo de tu menú */
+		  padding: 10px 0;           /* Espaciado superior e inferior */
+		}
+		.banner-menu img {
+		  max-width: 100%;           /* Evita que el banner se salga de la pantalla */
+		  height: auto;              /* Mantiene las proporciones de la imagen */
+		  display: block;            /* Quita espacios en blanco residuales */
+		}
+
 <script>
     const slider = document.querySelector('.navigation-banner');
     let isDown = false;
@@ -1702,23 +1716,28 @@
         <h1>RESTAURANT DONDE ARMANDO</h1>
         <p>¡El Mejor lugar Familiar!</p>
     </header> -->
-
+<nav class="menu-contenedor">
+  <!-- Tu banner o logo -->
+ 		<div class="banner-menu">
 	    <!-- BANNER DE ELECCIÓN -->
-    <nav class="navigation-banner">
-			<!-- Botón de Inicio Principal -->
-		<a href="#" class="btn-inicio-destacado">
-			<span>🏠</span> Inicio
-		</a>
-        <a href="#especiales" class="nav-btn" style="background-color: var(--accent); color: #000;">⭐ Especiales</a>
-        <a href="#desayunos" class="nav-btn">Desayunos</a>
-        <a href="#compartir" class="nav-btn">Para Compartir</a>
-		<a href="#empanadas" class="nav-btn">Empanadas y Ceviches</a>
-        <a href="#carnes" class="nav-btn">Carnes</a>
-        <a href="#pescados" class="nav-btn">Pescados</a>
-		<a href="#platos-calientes" class="nav-btn">Platos</a>
-        <a href="#ninos" class="nav-btn">Menú de Niños</a>
-        <a href="#bebidas" class="nav-btn">Bebidas</a>
-    </nav>
+		    <nav class="navigation-banner">
+					<!-- Botón de Inicio Principal -->
+				<a href="#" class="btn-inicio-destacado">
+					<span>🏠</span> Inicio
+				</a>
+		        <a href="#especiales" class="nav-btn" style="background-color: var(--accent); color: #000;">⭐ Especiales</a>
+		        <a href="#desayunos" class="nav-btn">Desayunos</a>
+		        <a href="#compartir" class="nav-btn">Para Compartir</a>
+				<a href="#empanadas" class="nav-btn">Empanadas y Ceviches</a>
+		        <a href="#carnes" class="nav-btn">Carnes</a>
+		        <a href="#pescados" class="nav-btn">Pescados</a>
+				<a href="#platos-calientes" class="nav-btn">Platos</a>
+		        <a href="#ninos" class="nav-btn">Menú de Niños</a>
+		        <a href="#bebidas" class="nav-btn">Bebidas</a>
+		    </nav>
+
+	    </div>
+</nav>
 	<!-- BOTONES DESTACADOS EXCLUSIVOS -->
 
 <!-- 	<div class="special-nav-container"> -->
