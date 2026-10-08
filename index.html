@@ -1651,73 +1651,6 @@
 		    display: block;             /* Elimina espacios vacíos debajo de la imagen */
 		}
 
-/* 1. Reset básico para eliminar márgenes del navegador */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body, html {
-    width: 100%;
-    height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* 2. Contenedor que aplica la imagen de las letras como fondo */
-.contenedor-fondo {
-    width: 100%;
-    height: 100vh; /* Ocupa todo el alto de la pantalla */
-    
-    /* Configuración de la imagen de fondo */
-    background-image: url('nombre3.png'); /* Reemplaza con la ruta de tu imagen */
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain; /* Ajusta la escala sin recortar las letras */
-    background-color: #0f172a; /* Fondo azul oscuro pizarra (Tailwind slate-900) */
-    
-    /* Centrado del contenido del sitio */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* 3. Estilos opcionales para elementos sobre el fondo */
-.contenido-tarjeta {
-    text-align: center;
-    color: #ffffff;
-    background-color: rgba(15, 23, 42, 0.6); /* Capa translúcida para legibilidad */
-    padding: 2rem;
-    border-radius: 12px;
-    backdrop-filter: blur(4px); /* Efecto de vidrio esmerilado moderno */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.contenido-tarjeta h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    letter-spacing: 2px;
-}
-
-.contenido-tarjeta p {
-    color: #94a3b8; /* Gris claro */
-    margin-bottom: 1.5rem;
-}
-
-.btn-menu {
-    background-color: #e2e8f0;
-    color: #0f172a;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.btn-menu:hover {
-    background-color: #ffffff;
-}
 
 <script>
     const slider = document.querySelector('.navigation-banner');
@@ -1759,7 +1692,6 @@ body, html {
     </style>
 </head>
 <body>
- <main class="contenedor-fondo">
 	<header class="menu-header">
 	    <div class="logo-wrapper">
 	        <!-- Reemplaza con la ruta de tu archivo de imagen procesado -->
@@ -2750,6 +2682,5 @@ body, html {
         <span>💬</span> Pedir por WhatsApp
     </a>
  -->
-    </main>
 </body>
 </html>
