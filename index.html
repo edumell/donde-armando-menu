@@ -1660,7 +1660,120 @@
 		    display: block;             /* Elimina espacios vacíos debajo de la imagen */
 		}
 
+/* CERVEZA */
 
+		        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e1e;
+            color: #f5f5f5;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #2d2d2d;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #f39c12;
+            padding-bottom: 10px;
+        }
+
+        header h1 {
+            color: #f39c12;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lista-cervezas {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cerveza-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #444;
+        }
+
+        .nombre {
+            font-size: 1.1rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .precio {
+            font-size: 1.1rem;
+            color: #2ecc71;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* Nuevo Bloque Educativo */
+        .bloque-educativo {
+            width: 100%;
+            max-width: 500px;
+            background-color: #222222;
+            border-left: 4px solid #f39c12;
+            border-radius: 4px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .bloque-educativo h3 {
+            color: #f39c12;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .bloque-educativo p {
+            font-size: 0.95rem;
+            color: #cccccc;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .bloque-educativo ul {
+            list-style: none;
+        }
+
+        .bloque-educativo li {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .bloque-educativo li::before {
+            content: "•";
+            color: #f39c12;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
 
 
 <script>
@@ -2432,6 +2545,83 @@
 				<strong>🇨🇱 Tradición Coctelera:</strong> Platos e ingredientes locales dan origen a combinaciones únicas en nuestra barra. Por ejemplo, la **Vaina** es un cóctel clásico chileno que destaca por su textura extremadamente cremosa y espumosa, la cual se logra gracias a la emulsión perfecta generada al batir yemas de huevo frescas con vino añejo, cacao y un toque de canela.
 			</div>
 		</section>
+
+<!-- CEVEZAS --> 
+
+		 <!-- Contenedor del Menú -->
+    <div class="menu-container">
+        <header>
+            <h1>Cervezas</h1>
+        </header>
+
+        <div class="lista-cervezas">
+            <div class="cerveza-item">
+                <span class="nombre">Royal 330cc</span>
+                <span class="precio">$3.000</span>
+            </div>
+
+            <div class="cerveza-item">
+                <span class="nombre">Kunstman torobayo</span>
+                <span class="precio">$3.500</span>
+            </div>
+
+            <div class="cerveza-item">
+                <span class="nombre">Corona 330cc</span>
+                <span class="precio">$3.000</span>
+            </div>
+
+            <div class="cerveza-item">
+                <span class="nombre">Cristal lata</span>
+                <span class="precio">$1.600</span>
+            </div>
+
+            <div class="cerveza-item">
+                <span class="nombre">Escudo lata</span>
+                <span class="precio">$1.600</span>
+            </div>
+
+            <div class="cerveza-item">
+                <span class="nombre">Heineken 330cc</span>
+                <span class="precio">$3.000</span>
+            </div>
+
+            <div class="cerveza-item">
+                <span class="nombre">Stella artois 330cc</span>
+                <span class="precio">$3.000</span>
+            </div>
+
+            <div class="cerveza-item">
+                <span class="nombre">Kusqueña 330cc</span>
+                <span class="precio">$3.000</span>
+            </div>
+
+            <div class="cerveza-item">
+                <span class="nombre">Coors beer 330cc</span>
+                <span class="precio">$3.000</span>
+            </div>
+
+            <div class="cerveza-item">
+                <span class="nombre">Austral calafate</span>
+                <span class="precio">$3.500</span>
+            </div>
+
+            <div class="cerveza-item">
+                <span class="nombre">Base de michelada</span>
+                <span class="precio">$1.500</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bloque Educativo -->
+    <div class="bloque-educativo">
+        <h3>¿Sabías qué? | Cultura Cervecera</h3>
+        <p>Las cervezas de nuestra carta se dividen principalmente en dos grandes familias según su tipo de fermentación:</p>
+        <ul>
+            <li><strong>Lager:</strong> Fermentadas a bajas temperaturas. Suelen ser limpias, ligeras y muy refrescantes (como la Corona, Heineken o Stella Artois).</li>
+            <li><strong>Ale:</strong> Fermentadas a temperaturas más altas, lo que aporta sabores complejos, frutales o florales (como la Kunstmann Torobayo o Austral Calafate).</li>
+            <li><strong>¿Qué es una Michelada?:</strong> Una tradición americana donde la cerveza se combina con jugo de limón, hielo y un toque de salsas o especias en un vaso escarchado con sal. ¡Ideal para refrescarse!</li>
+        </ul>
+    </div>
 		
 		<section class="category" id="carta-vinos">
 			<h2>Carta de Vinos</h2>
