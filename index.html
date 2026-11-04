@@ -1661,8 +1661,179 @@
 		}
 
 /* CERVEZA */
-		
 
+		
+/* RESET GENERAL OPTIMIZADO PARA MÓVILES */
+       /*s * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent; /* Elimina el flash azul al tocar en celular */
+        }*/
+
+        /* DISEÑO BASE Y CENTRADO COMPATIBLE CON PANTALLAS TÁCTILES */
+        /*
+		body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 16px; /* Espaciado de seguridad para bordes de pantalla */
+            gap: 16px;
+        }
+		*/
+
+        /* CONTENEDOR FLUIDO Y ADAPTABLE (RESPONSIVE) */
+        .menu-container {
+            width: 100%;
+            max-width: 440px; /* Ancho ideal para una sola mano */
+            background: #1e1e1e;
+            border-radius: 16px;
+            padding: 24px 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            border: 1px solid #2a2a2a;
+        }
+
+        /* CABECERA CON TAMAÑO DE TEXTO SEGURO */
+        header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        header h1 {
+            color: #f39c12;
+            font-size: 1.8rem; /* Escalado para que no se corte en pantallas angostas */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        header::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #f39c12;
+            margin: 8px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* LISTA CON ZONAS DE TOQUE CÓMODAS */
+        .lista-cervezas {
+            display: flex;
+            flex-direction: column;
+            gap: 4px; /* Pegados pero con padding interno */
+        }
+
+        /* CADA ÍTEM OPTIMIZADO PARA EL DEDO (PULSAR) */
+        .cerveza-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0; /* Mayor área de lectura y click */
+            border-bottom: 1px dashed #333;
+        }
+
+        .cerveza-item:last-child {
+            border-bottom: none; /* Quita la última línea */
+        }
+
+        /* CONECTOR AUTOMÁTICO */
+        .conector-puntos {
+            flex-grow: 1;
+            border-bottom: 2px dotted #444;
+            margin: 0 10px;
+            position: relative;
+            top: -3px;
+        }
+
+        .nombre {
+            font-size: 1rem;
+            color: #ffffff;
+            font-weight: 500;
+            max-width: 70%; /* Evita que nombres largos pisen el precio */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .precio {
+            font-size: 1.05rem;
+            color: #2ecc71;
+            font-weight: 600;
+            white-space: nowrap; /* Impide que el precio se parta en dos renglones */
+        }
+
+        /* BLOQUE EDUCATIVO ADAPTADO */
+        .bloque-educativo {
+            width: 100%;
+            max-width: 440px;
+            background-color: #1a1a1a;
+            border-top: 4px solid #f39c12;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid #252525;
+        }
+
+        .bloque-educativo h3 {
+            color: #f39c12;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .bloque-educativo p {
+            font-size: 0.9rem;
+            color: #aaaaaa;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .bloque-educativo ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* Más espacio entre viñetas para leer mejor en pantallas chicas */
+        }
+
+        .bloque-educativo li {
+            font-size: 0.85rem;
+            color: #cccccc;
+            line-height: 1.5;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .bloque-educativo li::before {
+            content: "🍺";
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+            top: 2px;
+        }
+
+
+		
+		   /* OPTIMIZACIONES ESPECÍFICAS PARA CELULARES MUY CHICOS (Pantallas  360px) */
+        @media (max-width: 360px) {
+            body {
+                padding: 10px 8px;
+            }
+            .menu-container, .bloque-educativo {
+                padding: 16px 12px;
+            }
+            header h1 {
+                font-size: 1.5rem;
+            }
+            .nombre, .precio {
+                font-size: 0.95rem;
+            }
+        }
 
 <script>
     const slider = document.querySelector('.navigation-banner');
@@ -1731,6 +1902,7 @@
 				<a href="#platos-calientes" class="nav-btn">Platos</a>
 		        <a href="#ninos" class="nav-btn">Menú de Niños</a>
 		        <a href="#bebidas" class="nav-btn">Bebidas</a>
+				<a href="#cerveza" class="nav-btn">Cerveza</a>
 		    </nav>
 
 	<!-- BOTONES DESTACADOS EXCLUSIVOS -->
@@ -2434,20 +2606,86 @@
 			</div>
 		</section>
 
-<!-- CEVEZAS --> 
+<!-- CERVEZAS --> 
+		<section class="category" id="cerveza">
+			<div class="menu-container-cerveza">
+			 <!--   <header>
+					<h1>Cervezas</h1>
+				</header> -->
+				<h2>Cervezas 🍺</h2>
+				<div class="lista-cervezas">
+					<div class="cerveza-item">
+						<span class="nombre">Royal 330cc</span>
+						<span class="precio">$3.000</span>
+					</div>
 
+					<div class="cerveza-item">
+						<span class="nombre">Kunstman torobayo</span>
+						<span class="precio">$3.500</span>
+					</div>
 
-    <!-- Bloque Educativo -->
-	    <div class="bloque-educativo">
-	        <h3>¿Sabías qué? | Cultura Cervecera</h3>
-	        <p>Las cervezas de nuestra carta se dividen principalmente en dos grandes familias según su tipo de fermentación:</p>
-	        <ul>
-	            <li><strong>Lager:</strong> Fermentadas a bajas temperaturas. Suelen ser limpias, ligeras y muy refrescantes (como la Corona, Heineken o Stella Artois).</li>
-	            <li><strong>Ale:</strong> Fermentadas a temperaturas más altas, lo que aporta sabores complejos, frutales o florales (como la Kunstmann Torobayo o Austral Calafate).</li>
-	            <li><strong>¿Qué es una Michelada?:</strong> Una tradición americana donde la cerveza se combina con jugo de limón, hielo y un toque de salsas o especias en un vaso escarchado con sal. ¡Ideal para refrescarse!</li>
-	        </ul>
-	    </div>
-	</section>
+					<div class="cerveza-item">
+						<span class="nombre">Corona 330cc</span>
+						<span class="precio">$3.000</span>
+					</div>
+
+					<div class="cerveza-item">
+						<span class="nombre">Cristal lata</span>
+						<span class="precio">$1.600</span>
+					</div>
+
+					<div class="cerveza-item">
+						<span class="nombre">Escudo lata</span>
+						<span class="precio">$1.600</span>
+					</div>
+
+					<div class="cerveza-item">
+						<span class="nombre">Heineken 330cc</span>
+						<span class="precio">$3.000</span>
+					</div>
+
+					<div class="cerveza-item">
+						<span class="nombre">Stella artois 330cc</span>
+						<span class="precio">$3.000</span>
+					</div>
+
+					<div class="cerveza-item">
+						<span class="nombre">Kusqueña 330cc</span>
+						<span class="precio">$3.000</span>
+					</div>
+
+					<div class="cerveza-item">
+						<span class="nombre">Coors beer 330cc</span>
+						<span class="precio">$3.000</span>
+					</div>
+
+					<div class="cerveza-item">
+						<span class="nombre">Austral calafate</span>
+						<span class="precio">$3.500</span>
+					</div>
+
+					<div class="cerveza-item">
+						<span class="nombre">Base de michelada</span>
+						<span class="precio">$1.500</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Bloque Educativo -->
+			<!--	<div class="bloque-educativo"> -->
+				<div class="sharing-didactic">
+					<h3>¿Sabías qué? | Cultura Cervecera</h3>
+					<p>Las cervezas de nuestra carta se dividen principalmente en dos grandes familias según su tipo de fermentación:</p>
+					<ul>
+						<li><strong>Lager:</strong> Fermentadas a bajas temperaturas. Suelen ser limpias, ligeras y muy refrescantes (como la Corona, Heineken o Stella Artois).</li>
+						<li><strong>Ale:</strong> Fermentadas a temperaturas más altas, lo que aporta sabores complejos, frutales o florales (como la Kunstmann Torobayo o Austral Calafate).</li>
+						<li><strong>¿Qué es una Michelada?:</strong> Una tradición americana donde la cerveza se combina con jugo de limón, hielo y un toque de salsas o especias en un vaso escarchado con sal. ¡Ideal para refrescarse!</li>
+					</ul>
+				</div>
+		</section>
+	
+<!-- fin de cervezas -->
+
 		<section class="category" id="carta-vinos">
 			<h2>Carta de Vinos</h2>
 			
